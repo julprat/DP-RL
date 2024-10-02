@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sequential &amp; Recursive Problems &#8212; DP &amp; RL for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Recursive_Problem';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="DP & RL for Economists - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="DP & RL for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sequential &amp; Recursive Problems</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub/issues/new?title=Issue%20on%20page%20%2FRecursive_Problem.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Recursive_Problem.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sequential & Recursive Problems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-from-the-class-notes">Exercises from the Class Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-1">Exercise 1.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-2">Exercise 1.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-4">Exercise 1.4</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-exercises">Additional Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-5-lagrangian">Exercise 1.5 (Lagrangian)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-6-unbounded-rewards">Exercise 1.6 (Unbounded Rewards)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-7-bubbles">Exercise 1.7 (Bubbles)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sequential-recursive-problems">
+<h1>Sequential &amp; Recursive Problems<a class="headerlink" href="#sequential-recursive-problems" title="Link to this heading">#</a></h1>
+<section id="exercises-from-the-class-notes">
+<h2>Exercises from the Class Notes<a class="headerlink" href="#exercises-from-the-class-notes" title="Link to this heading">#</a></h2>
+<section id="exercise-1-1">
+<h3>Exercise 1.1<a class="headerlink" href="#exercise-1-1" title="Link to this heading">#</a></h3>
+<p>Show that the objective function of the cake-eating problem is strictly concave when the per-period utility is strictly concave.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>If <span class="math notranslate nohighlight">\(U\left(c\right)\)</span> is strictly concave, then <span class="math notranslate nohighlight">\(\forall c_{1}, c_{2}, \forall \alpha\in\left(0,1\right)\)</span>,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+
+U\left(\left(1-\alpha\right)c_{1}+\alpha c_{2}\right)&gt;\left(1-\alpha\right)U\left(c_{1}\right) + \alpha U\left(c_{2}\right).
+
+\end{equation*}\]</div>
+<p>Due to subadditivity of a concave function,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\sum_{t=0}^{\infty}\beta^{t}U\left(\left(1-\alpha\right)c_{1}+\alpha c_{2}\right)&gt;\sum_{t=0}^{\infty}\left(1-\alpha\right)U\left(c_{1}\right) + \sum_{t=0}^{\infty}\alpha U\left(c_{2}\right).
+\end{equation*}\]</div>
+<p>Therefore the objective function of the cake-eating problem is strictly concave when the per-period utility is strictly concave.</p>
+</section>
+<section id="exercise-1-2">
+<h3>Exercise 1.2<a class="headerlink" href="#exercise-1-2" title="Link to this heading">#</a></h3>
+<p>Generalize Theorem 1.1 without assuming that a maximum exists. Instead let the solution of (SP) be defined as a
+supremum and prove that it satisfies (FE).</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>See Proof of Theorem 4.2 in SLP.</p>
+</section>
+<section id="exercise-1-4">
+<h3>Exercise 1.4<a class="headerlink" href="#exercise-1-4" title="Link to this heading">#</a></h3>
+<p>Consider the Estate Planning problem when <span class="math notranslate nohighlight">\(U(c)=c\)</span>, <span class="math notranslate nohighlight">\(\beta=1/(1+r)\)</span>
+and modify the savings technology so that</p>
+<p><span class="math notranslate nohighlight">\(\Gamma(x)= \begin{cases} -x/\beta, \text{ if  } x&gt;0 \\
+                       x/\beta, \text{ if  } x \leq 0 \end{cases}\)</span></p>
+<p>Show that <span class="math notranslate nohighlight">\(V(x)=(1+r)x\)</span> solves the Bellman equation although <span class="math notranslate nohighlight">\(V^*(x)\neq (1+r)x\)</span>.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>Since the feasibility set is always a singleton, the agent has no control over his action. Considering first cases where <span class="math notranslate nohighlight">\(x&lt;0\)</span>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V^*(x_0) &amp; = (1+r)x_0-x_1+\beta V^*(x_1) \\
+          &amp; = (1+r)x_0 -\frac{x_0}{\beta}+\beta V^*\left(\frac{x_0}{\beta}\right) \\
+          &amp; = \beta V^*\left(\frac{x_0}{\beta}\right).
+    \end{align*}\]</div>
+<p>The second equality follows from <span class="math notranslate nohighlight">\(\beta=1/(1+r)\)</span>. Iterating the computation above, one finds that <span class="math notranslate nohighlight">\(V^*(x_0)=0\)</span> when <span class="math notranslate nohighlight">\(x_0&lt;0\)</span>.</p>
+<p>Consider now cases where <span class="math notranslate nohighlight">\(x&gt;0\)</span>. Then we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+      V^*(x_0) &amp; = (1+r)x_0-x_1+\beta V^*(x_1) \\
+            &amp; = (1+r)x_0 +\frac{x_0}{\beta}+\beta V^*\left(-\frac{x_0}{\beta}\right) \\
+            &amp; = 2(1+r)x_0+\beta V^*\left(-\frac{x_0}{\beta}\right)\\
+            &amp; = 2(1+r)x_0.
+      \end{align*}\]</div>
+<p>The last equality follows from the fact that <span class="math notranslate nohighlight">\(V^*\left(-\frac{x_0}{\beta}\right)=0\)</span> because <span class="math notranslate nohighlight">\(-x_0/\beta\)</span> is negative.</p>
+<p>Putting together the two solutions, we find that <span class="math notranslate nohighlight">\(V^*(x)=\min\{2(1+r)x,0\}\)</span>. The optimal solution to the sequential problem satisfies the trensversality condition since <span class="math notranslate nohighlight">\(\lim_{t\rightarrow \infty}\beta^tV^*(x^*_t)=0\)</span>.</p>
+<p>We now compute the solution of the Functional Equation <span class="math notranslate nohighlight">\(V(x)=\max_{x' \in \Gamma(x)}\left\{(1+r)x-x'+\beta V(x')\right\}.\)</span></p>
+<p>We try the following guess <span class="math notranslate nohighlight">\(V(x)=(1+r)x\)</span>. Reinserting it into the Functional Equation, we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+      V(x) &amp; = \max_{x' \in \Gamma(x)}\left\{(1+r)x-x'+\beta (1+r)(x')\right\} \\
+            &amp; = \max_{x' \in \Gamma(x)}\left\{(1+r)x\right\}\\
+            &amp; = (1+r)x,\\
+      \end{align*}\]</div>
+<p>The second equality follows from <span class="math notranslate nohighlight">\(\beta=1/(1+r)\)</span>. Hence <span class="math notranslate nohighlight">\(V(x)=(1+r)x\)</span> is indeed a solution of the Functional Equation. However, <span class="math notranslate nohighlight">\(V(x) \neq V^*(x)\)</span> even though <span class="math notranslate nohighlight">\(V^*(x^*)\)</span> satisfies the transversality condition. By contrast, <span class="math notranslate nohighlight">\(V(x)\)</span> does not satsfy the condition of Theorem 1.5 in the class notes since</p>
+<div class="math notranslate nohighlight">
+\[ \lim_{t\rightarrow \infty}\beta^tV(x^*_t)=x_0&lt;0, \text{when } x_0&lt;0.\]</div>
+</details></section>
+</section>
+<section id="additional-exercises">
+<h2>Additional Exercises<a class="headerlink" href="#additional-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-5-lagrangian">
+<h3>Exercise 1.5 (Lagrangian)<a class="headerlink" href="#exercise-1-5-lagrangian" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Consider the Estate Planning problem in Exercice 1.1. Let the horizon <span class="math notranslate nohighlight">\(T\)</span> go to infinity and use the Lagrangian to derive the transversality condition.</p></li>
+<li><p>Under what condition on the value function is the transversality condition for the Lagrangian problem implied by that of the recursive problem?</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic">
+<li><p>We introduce the Lagrange multiplier <span class="math notranslate nohighlight">\((\lambda)\)</span> for the intertemporal constraint that govern the evolution of assets, and a terminal multiplier <span class="math notranslate nohighlight">\(( \mu_T \geq 0 )\)</span> for the no Ponzi condition <span class="math notranslate nohighlight">\(( a_{T+1} \geq 0 )\)</span>.</p>
+<p>The Lagrangian for this problem with finite horizon <span class="math notranslate nohighlight">\(T\)</span> can be written as follows</p>
+<p><span class="math notranslate nohighlight">\(
+ \mathcal{L} = \sum_{t=0}^T \beta^t U(c_t) + \lambda \left[a_0 - \sum_{t=0}^T c_t - a_{T+1}\right] + \mu_T a_{T+1}.
+ \)</span></p>
+<p>Focusing on the terminal condition, we find that</p>
+<p><span class="math notranslate nohighlight">\(
+ \frac{\partial \mathcal{L}}{\partial a_{T+1}} = 0 \rightarrow \lambda = \mu_T .
+ \)</span></p>
+<p>Since <span class="math notranslate nohighlight">\(\lambda = \beta^t u'(c_t) &gt;0\)</span>, we have <span class="math notranslate nohighlight">\(\mu_T &gt;0\)</span> and the Kuhn-Tucker condition <span class="math notranslate nohighlight">\(\mu_T a_{T+1} = 0\)</span> implies that <span class="math notranslate nohighlight">\(a_{T+1} = 0\)</span>.</p>
+<p>Letting the horizon go to infinity, we obtain the transversality condition</p>
+<p><span class="math notranslate nohighlight">\( \lim_{T\rightarrow \infty} \mu_T a_{T+1} = \lim_{T\rightarrow \infty} \beta^T u'(c_T) a_{T+1} = 0.\)</span></p>
+</li>
+<li><p>The FOC of the Bellman equation is given by <span class="math notranslate nohighlight">\(\beta V'(a_{t+1})= u'(c_t)\)</span>. Hence, if <strong>the value function is concave</strong>, we have</p>
+<p><span class="math notranslate nohighlight">\( u'(c_T) a_{T+1}=\beta V'(a_{T+1})a_{T+1} \leq \beta V(a_{T+1})\)</span>,</p>
+<p>which implies that
+<span class="math notranslate nohighlight">\( \beta^T u'(c_T) a_{T+1} \leq \beta^{T+1} V(a_{T+1})\)</span>.
+Remember that the transversality condition of the Bellman equation reads <span class="math notranslate nohighlight">\(\lim_{T\rightarrow \infty} \beta^TV(a_T) =0\)</span>. Hence we indeed have <span class="math notranslate nohighlight">\(\lim_{T\rightarrow \infty} \beta^T u'(c_T) a_{T+1} = 0\)</span>, whenever the transversality condition of the recursive problem holds and the value function is concave.</p>
+<p>We will show in lecture 2 that concavity of the value function holds true because the value function inherits the concavity of the per-period utility function <span class="math notranslate nohighlight">\(u(c)\)</span>. In other words, the transversality condition of the recrusive problem is more stringent than that of the Lagrangian problem.</p>
+</li>
+</ol>
+</section>
+<section id="exercise-1-6-unbounded-rewards">
+<h3>Exercise 1.6 (Unbounded Rewards)<a class="headerlink" href="#exercise-1-6-unbounded-rewards" title="Link to this heading">#</a></h3>
+<p>Show that the transversality condition of Theorem 1.3 is violated in the cake-eating problem when <span class="math notranslate nohighlight">\(U(c)=ln(c)\)</span>.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>Consider the path where <span class="math notranslate nohighlight">\(c_0=(1+r)a_0\)</span> and <span class="math notranslate nohighlight">\(c_t=0\)</span> for all <span class="math notranslate nohighlight">\(t&gt;0\)</span>. This consumption profile is obviously feasible. Hence <span class="math notranslate nohighlight">\(\underline{a}=\{(1+r)a_0,0,0,...\}\in \Pi(a_0)\)</span>. Given that <span class="math notranslate nohighlight">\(\Gamma(0)=0\)</span>, the value function must satisfy</p>
+<p><span class="math notranslate nohighlight">\( V(0) = U(0) + \beta V(0),\)</span></p>
+<p>and so <span class="math notranslate nohighlight">\(V(0) = U(0)/(1-\beta)=-\infty\)</span> since <span class="math notranslate nohighlight">\(U(c)=ln(c)\)</span>. In particular, we have <span class="math notranslate nohighlight">\(V(0)&lt;-\beta^{-T}\)</span>, which implies in turn that <span class="math notranslate nohighlight">\(\beta^TV(a_T)&lt;-1\)</span> for all <span class="math notranslate nohighlight">\(T\)</span>. It follows that <span class="math notranslate nohighlight">\(\underline{a}\)</span> violates the transversality condition <span class="math notranslate nohighlight">\(\lim_{T\rightarrow \infty} \beta^TV(a_T)=0\)</span>.</p>
+</section>
+<section id="exercise-1-7-bubbles">
+<h3>Exercise 1.7 (Bubbles)<a class="headerlink" href="#exercise-1-7-bubbles" title="Link to this heading">#</a></h3>
+<p>Consider a deterministic version of the Lucas (1978) asset pricing model. There are many homogeneous agents, a single good and a single asset that pays a dividend of <span class="math notranslate nohighlight">\(d_t\)</span> units of hte good in each period <span class="math notranslate nohighlight">\(t\)</span>. The aset supply is noramlized to one. The agent solves</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \max_{\{c_t,x_t\}_{t=0}^\infty} &amp; \sum_{t=0}^\infty \beta^t u(c_t) \\
+    s.t. \text{ } &amp; x_0 = 1, \\
+          \text{ } &amp; c_t + p_tx_{t+1} =(p_t+d_t)x_t, x_{t+1} \geq 0, t=0,1,2,\dots
+\end{align*}\]</div>
+<ol class="arabic">
+<li><p>Show that the fundamental price</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    p^*_t =\sum_{i=0}^\infty \beta^i \frac{u'(d_{t+i})}{u'(d_t)}d_{t+i}
+    \end{equation*}\]</div>
+<p>satisfies the Euler equation of the agent.</p>
+</li>
+<li><p>The sequence <span class="math notranslate nohighlight">\(\{p^*_t+b_t\}\)</span> also satisfies the Euler equation as long as the bubbly component <span class="math notranslate nohighlight">\(b_t\)</span> obeys the following law of motion</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    u'(d_{t})b_t=\beta u'(d_{t+1})b_{t+1}.
+    \end{equation*}\]</div>
+<p>Explain why the bubble is ruled out by the transversality condition of the Lagrangian problem.</p>
+</li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic">
+<li><p>Since The Euler equation is given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    u'(d_{t})p_t=\beta u'(d_{t+1})(p_{t+1}+d_{t+1}),
+    \end{equation*}\]</div>
+<p>it is indeed satisfied replacing <span class="math notranslate nohighlight">\(p_t\)</span> with <span class="math notranslate nohighlight">\(p^*_t\)</span>.</p>
+</li>
+<li><p>The transversality condition of the Lagrangian problem reads <span class="math notranslate nohighlight">\(\lim_{T\rightarrow \infty} \beta^Tu'(d_t)p_T=0\)</span>. However, when <span class="math notranslate nohighlight">\(b_0\)</span> is positive, we have <span class="math notranslate nohighlight">\(\beta^t u'(d_t)b_t = u'(d_0)b_0 &gt;0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>, and so the transversality condition is violated. Hence, the transversality condition is not only sufficient but also necessary to ensure that the bubble component of asset prices vanishes. See Kamihigashi (2001, Econometrica) for more details on the necessity of transversality conditions.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-from-the-class-notes">Exercises from the Class Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-1">Exercise 1.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-2">Exercise 1.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-4">Exercise 1.4</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-exercises">Additional Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-5-lagrangian">Exercise 1.5 (Lagrangian)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-6-unbounded-rewards">Exercise 1.6 (Unbounded Rewards)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-7-bubbles">Exercise 1.7 (Bubbles)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Julien Prat
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
