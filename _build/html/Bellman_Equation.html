@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bellman Equation &#8212; DP &amp; RL for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Bellman_Equation';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Sequential &amp; Recursive Problems" href="Recursive_Problem.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="DP & RL for Economists - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="DP & RL for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Recursive_Problem.html">Sequential &amp; Recursive Problems</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bellman Equation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub/issues/new?title=Issue%20on%20page%20%2FBellman_Equation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Bellman_Equation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bellman Equation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-from-the-class-notes">Exercises from the Class Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-2">Exercise 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-3">Exercise 2.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-exercises">Additional Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-4">Exercise 2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-5">Exercise 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-6">Exercise 2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-7">Exercise 2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-8">Exercise 2.8</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bellman-equation">
+<h1>Bellman Equation<a class="headerlink" href="#bellman-equation" title="Link to this heading">#</a></h1>
+<section id="exercises-from-the-class-notes">
+<h2>Exercises from the Class Notes<a class="headerlink" href="#exercises-from-the-class-notes" title="Link to this heading">#</a></h2>
+<section id="exercise-2-2">
+<h3>Exercise 2.2<a class="headerlink" href="#exercise-2-2" title="Link to this heading">#</a></h3>
+<p>Prove that the set <span class="math notranslate nohighlight">\(\mathcal{C}(X)\)</span> of bounded continuous functions <span class="math notranslate nohighlight">\(f:X\rightarrow \mathbb{R}\)</span>
+equipped with the sup norm <span class="math notranslate nohighlight">\(|| y || \equiv \max_{\{ x \in X \}}|y(x)|\)</span> is a complete normed vector space.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>See Example 3 in Chapter 2.11 of Luenberger, <span class="math notranslate nohighlight">\(\textit{Optimization by Vector Space Methods}\)</span>.</p>
+</section>
+<section id="exercise-2-3">
+<h3>Exercise 2.3<a class="headerlink" href="#exercise-2-3" title="Link to this heading">#</a></h3>
+<p>Use an inductive argument similar to the one in the proof of Theorem 2.5. to establish that, when assumptions 2.1-2.4 hold, <span class="math notranslate nohighlight">\(V\)</span> is concave.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>Pick <span class="math notranslate nohighlight">\(x_{1},\ x_{2}\in X\)</span> with <span class="math notranslate nohighlight">\(x_{1}\neq x_{2}\)</span>. Let <span class="math notranslate nohighlight">\(\theta\in\left(0,1\right)\)</span>, and <span class="math notranslate nohighlight">\(x_{\theta} = \left(1-\theta\right)x_{1} + \theta x_{2}\)</span>. Since <span class="math notranslate nohighlight">\(\Gamma\)</span> is convex, we have <span class="math notranslate nohighlight">\(g\left(x_{\theta}\right) \in\Gamma\left(x_{\theta}\right)\)</span>, hence</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    Tf\left(x_{\theta}\right) = F\left(x_{\theta}, g\left(x_{\theta}\right) \right) + \beta f\left(g\left(x_{\theta}\right)\right).\\
+\end{align*}\]</div>
+<p>Assuming that <span class="math notranslate nohighlight">\(f\)</span> is strictly concave, we find that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    Tf\left(x_{\theta}\right) &amp; = F\left(x_{\theta}, g\left(x_{\theta}\right) \right) + \beta f\left(g\left(x_{\theta}\right)\right)\\
+    &amp; &gt; \left(1-\theta\right)[F\left(x_{1}, g\left(x_{1}\right) \right) + \beta f\left(g\left(x_{1}\right)\right)] + \theta [F\left(x_{2}, g\left(x_{2}\right) \right) + \beta f\left(g\left(x_{2}\right)\right)]\\
+    &amp; = \left(1-\theta\right)Tf\left(x_{1}\right) + \beta Tf\left(x_{2}\right).\\
+\end{align*}\]</div>
+<p>The second equality follows from the concavity of <span class="math notranslate nohighlight">\(F\)</span> and the premise that <span class="math notranslate nohighlight">\(f\)</span> is also concave. Since <span class="math notranslate nohighlight">\(V = TV\)</span>, we conclude that <span class="math notranslate nohighlight">\(V\)</span> is concave.</p>
+</section>
+</section>
+<section id="additional-exercises">
+<h2>Additional Exercises<a class="headerlink" href="#additional-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-2-4">
+<h3>Exercise 2.4<a class="headerlink" href="#exercise-2-4" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Show that the space of non-decreasing functions is the closure of the space of increasing functions.</p></li>
+<li><p>Show that the space of differentiable functions is not closed.</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic">
+<li><p>We show that any non-decreasing function can be approximated arbitrarily closely by a sequence of strictly increasing function.</p>
+<p>Let <span class="math notranslate nohighlight">\(f:[a,b]\rightarrow R\)</span> be a non-decreasing function. We construct a sequence <span class="math notranslate nohighlight">\(\{f_{n}\}\)</span> such that <span class="math notranslate nohighlight">\(f_{n}\left(x\right)=f\left(x\right) + \frac{x}{n}\)</span>, where <span class="math notranslate nohighlight">\(n\in \mathbb{N}\)</span>.</p>
+<p>Each <span class="math notranslate nohighlight">\(f_{n}\)</span> is strictly increasing as for any <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span>, if <span class="math notranslate nohighlight">\(x_{1}&lt;x_{2}\)</span>, <span class="math notranslate nohighlight">\(f_{n}\left(x_{1}\right)&lt;f_{n}\left(x_{2}\right)\)</span>.</p>
+<p>As <span class="math notranslate nohighlight">\(n\rightarrow +\infty\)</span>, we have <span class="math notranslate nohighlight">\(\sup_{x\in [a,b]}\ |f_{n}\left(x\right) - f\left(x\right)| = \sup_{x\in [a,b]}\ \frac{x}{n} \leq \frac{b}{n}\)</span>. Therefore <span class="math notranslate nohighlight">\(f_{n}\rightarrow f\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow +\infty\)</span>, and we conclude that the space of non-decreasing functions is the closure of the space of strictly increasing functions.</p>
+</li>
+<li><p>We show that a sequence of differentiable functions in a closed set converges uniformly to a non-differentiable function.</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f_{n}\left(x\right) = \sqrt{\left(x-\frac{1}{2}\right)^2 + \frac{1}{n^2}}\)</span> for <span class="math notranslate nohighlight">\(x\in [0,1]\)</span>. It can be easily shown that <span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty}\ f\left(x\right) = |x - \frac{1}{2}|\)</span>, which is non-differentiable at <span class="math notranslate nohighlight">\(x = \frac{1}{2}\)</span>.</p>
+</li>
+</ol>
+</section>
+<section id="exercise-2-5">
+<h3>Exercise 2.5<a class="headerlink" href="#exercise-2-5" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be the space of all continuous, strictly increasing functions on <span class="math notranslate nohighlight">\([a,b]\)</span>, with <span class="math notranslate nohighlight">\(||x,y||=\max_{a\leq t \leq b}|x(t)-y(t)|\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Show that <span class="math notranslate nohighlight">\(S\)</span> is not complete.</p></li>
+<li><p>Show that <span class="math notranslate nohighlight">\(S\)</span> is complete if “strictly increasing” is replaced with “nondecreasing”.</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic">
+<li><p>We show that there exists a Cauchy sequence that does not converge to an element in S.</p>
+<p>Consider <span class="math notranslate nohighlight">\(x_{n}^{t} = 1 + \frac{t}{n},\ t\in[a,b]\)</span>. Pick an arbitrary <span class="math notranslate nohighlight">\(x_{m}\)</span>.</p>
+</li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\rho\left(x_{n}, x_{m}\right) &amp;= \max_{a\leq t\leq b} |\frac{t}{n} - \frac{t}{m}|\\
+&amp; = \max_{a\leq t\leq b} |\frac{t\left(m-n\right)}{nm}|\\
+&amp; = |\frac{b\left(m-n\right)}{nm}|
+\end{align*}\]</div>
+<p>It can be easily shown that <span class="math notranslate nohighlight">\(\rho\left(x_{n}, x_{m}\right) \rightarrow 0\)</span> as <span class="math notranslate nohighlight">\(n,m\rightarrow \infty\)</span>. However, <span class="math notranslate nohighlight">\(x_{n}\left(t\right)\rightarrow x\left(t\right) = 1\)</span>, which is a constant. This contradicts our premise that the limit is strictly increasing, thus showing that <span class="math notranslate nohighlight">\(S\)</span> is not complete.</p>
+<ol class="arabic simple" start="2">
+<li><p>From Question 1 of Exercise 2.4, we know that the space of non-decreasing functions is the closure of the space of increasing functions, meaning that any non-decreasing function in <span class="math notranslate nohighlight">\(S\)</span> can be arbitrarily approximated by a sequence of strictly increasing functions. Therefore, any Cauchy sequence will converge to an element contained by <span class="math notranslate nohighlight">\(S\)</span>, and such a space is complete.</p></li>
+</ol>
+</section>
+<section id="exercise-2-6">
+<h3>Exercise 2.6<a class="headerlink" href="#exercise-2-6" title="Link to this heading">#</a></h3>
+<p>Show that if <span class="math notranslate nohighlight">\(T\)</span> is a contraction on <span class="math notranslate nohighlight">\(S\)</span>, then <span class="math notranslate nohighlight">\(T\)</span> is uniformly continuous on <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>If <span class="math notranslate nohighlight">\(T\)</span> is a contraction mapping, then</p>
+<p><span class="math notranslate nohighlight">\( \exists \beta\in\left(0,1\right), \forall x,y\in S,\  \rho\left(Tx, Ty\right) \leq \beta\rho\left(x,y\right) \)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(T\)</span> is uniformly continuous, then</p>
+<p><span class="math notranslate nohighlight">\( \forall \epsilon&gt;0, \exists \delta&gt;0, \forall x,y\in S,\ \rho\left(x,y\right)&lt;\delta\ \Rightarrow\ \rho\left(Tx, Ty\right)&lt;\epsilon\)</span>.</p>
+<p>Now take <span class="math notranslate nohighlight">\(\delta = \frac{\epsilon}{\beta}\)</span>, then <span class="math notranslate nohighlight">\(\forall \epsilon&gt;0\)</span>, if <span class="math notranslate nohighlight">\(\rho\left(x,y\right)&lt;\delta\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(\rho\left(Tx, Ty\right) \leq \beta\rho\left(x,y\right) &lt; \beta \delta = \epsilon\)</span>.</p>
+<p>Therefore, <span class="math notranslate nohighlight">\(T\)</span> is uniformly continuous on S.</p>
+</section>
+<section id="exercise-2-7">
+<h3>Exercise 2.7<a class="headerlink" href="#exercise-2-7" title="Link to this heading">#</a></h3>
+<p>Show that in a Banach space, i.e. a complete metric space, a subset is complete if and only if it is closed.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>A complete subset is closed since every convergent (and hence Cauchy) sequence has a limit in the subset. A Cauchy sequence from a closed subset has a limit somewhere in the Banach space. By closure the limit must be in the subset.</p>
+<p>More explicitly, Since <span class="math notranslate nohighlight">\(S_0 ⊆ S\)</span> is closed, any convergent sequence in <span class="math notranslate nohighlight">\(S_0\)</span> converges to a point in <span class="math notranslate nohighlight">\(S_0\)</span>. Take the set of Cauchy sequences in <span class="math notranslate nohighlight">\(S\)</span>. They all converge to points in <span class="math notranslate nohighlight">\(S\)</span> since <span class="math notranslate nohighlight">\(S\)</span> is complete. Take the subset of those sequences that belong to <span class="math notranslate nohighlight">\(S_0\)</span>, then by the argument above they converge to a point in <span class="math notranslate nohighlight">\(S_0\)</span>, so <span class="math notranslate nohighlight">\(S_0\)</span> is complete</p>
+</section>
+<section id="exercise-2-8">
+<h3>Exercise 2.8<a class="headerlink" href="#exercise-2-8" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Show that a continuous function on a compact metric space is bounded and uniformly continuous.</p></li>
+<li><p>(Weierstrass’ extreme value theorem). If <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(f : X \rightarrow R\)</span> is continuous, then <span class="math notranslate nohighlight">\(f\)</span> is bounded and attains its maximum and minimum values.</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic">
+<li><p><strong>(Boundedness)</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is continuous on a compact metric space <span class="math notranslate nohighlight">\(X\)</span>, but it is not bounded. Then <span class="math notranslate nohighlight">\(\forall n\in \mathbb{N}, \exists x_{n}\in X\)</span>, such that <span class="math notranslate nohighlight">\(f\left(x_{n}\right)&gt;n\)</span>. Since <span class="math notranslate nohighlight">\(X\)</span> is compact, by Bolzano–Weierstrass theorem, there exists a convergent subsequence <span class="math notranslate nohighlight">\(\{x_{n_{k}}\}_{k\in\mathbb N}\)</span>. Denote its limit by <span class="math notranslate nohighlight">\(x\)</span>. Since <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(f\left(x_{n_{k}}\right)\)</span> should converge to <span class="math notranslate nohighlight">\(f\left(x\right)\)</span>. However <span class="math notranslate nohighlight">\(\forall k\)</span>, <span class="math notranslate nohighlight">\(f\left(x_{n_{k}}\right) &gt; x_{n_{k}}\)</span>, then <span class="math notranslate nohighlight">\(\left(x_{n_{k}}\right) \rightarrow +\infty\)</span>. This contradicts our premise, implying that a continuous function on a compact metric space is bounded.</p>
+<p><strong>(Uniform Continuity)</strong> Suppose <span class="math notranslate nohighlight">\(\exists \epsilon_{0}&gt;0\)</span>, such that <span class="math notranslate nohighlight">\(\forall \delta&gt;0, \exists x_{n},y_{n}\in X\)</span>, such that <span class="math notranslate nohighlight">\(\rho\left(x_{n}, y_{n}\right)&lt;\delta\)</span>, but <span class="math notranslate nohighlight">\(\rho\left(f\left(x_{n_{k}}\right),f\left(y_{n_{k}}\right)\right)\geq \epsilon_{0}\)</span>. Since <span class="math notranslate nohighlight">\(X\)</span> is compact, the sequence <span class="math notranslate nohighlight">\(\{x_{n_{k}}\}\)</span> has a convergent subsequence, denoted by <span class="math notranslate nohighlight">\(x^{*}\)</span>. Then as <span class="math notranslate nohighlight">\(k\rightarrow \infty\)</span>, <span class="math notranslate nohighlight">\(\{x_{n_{k}}\}\rightarrow x^{*}\)</span> and <span class="math notranslate nohighlight">\(\{y_{n_{k}}\}\rightarrow x^{*}\)</span>. However, as <span class="math notranslate nohighlight">\(f\left(x_{n_{k}}\right)\rightarrow f\left(x^{*}\right)\)</span> and <span class="math notranslate nohighlight">\(f\left(y_{n_{k}}\right)\rightarrow f\left(x^{*}\right)\)</span>, we have <span class="math notranslate nohighlight">\(\rho\left(f\left(x_{n_{k}}\right), f\left(y_{n_{k}}\right)\right)\rightarrow 0\)</span>, as <span class="math notranslate nohighlight">\(k\rightarrow +\infty\)</span>. This contradicts our premise, implying that a continuous function on a compact metric space is uniformly continuous.</p>
+</li>
+<li><p><strong>(Maximum)</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is upper-bounded by <span class="math notranslate nohighlight">\(M\)</span> on a compact metric space <span class="math notranslate nohighlight">\(X\)</span>, but it cannot attain <span class="math notranslate nohighlight">\(M\)</span>. Then <span class="math notranslate nohighlight">\(f\left(x\right)&lt;M,\ \forall x\in X\)</span>. Let <span class="math notranslate nohighlight">\(g\left(x\right) = \frac{1}{M-f\left(x\right)}\)</span>, then g is also bounded on <span class="math notranslate nohighlight">\(X\)</span>. Then <span class="math notranslate nohighlight">\(\exists K&gt;0\)</span> such that <span class="math notranslate nohighlight">\(g\left(x\right)\leq K,\ \forall x\in X\)</span> and <span class="math notranslate nohighlight">\(\frac{1}{M-f\left(x\right)}\leq K\)</span>, <span class="math notranslate nohighlight">\(f\left(x\right)\leq M-\frac{1}{k}\)</span>. <span class="math notranslate nohighlight">\(M\)</span> is no longer an upperbound now, thus <span class="math notranslate nohighlight">\(f\)</span> attains its maximum values.</p>
+<p><strong>(Minimum)</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is lower-bounded by <span class="math notranslate nohighlight">\(N\)</span> but cannot attain <span class="math notranslate nohighlight">\(N\)</span>, and let <span class="math notranslate nohighlight">\(g\left(x\right) = \frac{1}{N-f\left(x\right)}\)</span>. We can easily show that <span class="math notranslate nohighlight">\(N\)</span> is no longer a lower bound. Therefore <span class="math notranslate nohighlight">\(f\)</span> attains its minimum values.</p>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Recursive_Problem.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sequential &amp; Recursive Problems</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-from-the-class-notes">Exercises from the Class Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-2">Exercise 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-3">Exercise 2.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-exercises">Additional Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-4">Exercise 2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-5">Exercise 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-6">Exercise 2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-7">Exercise 2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-8">Exercise 2.8</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Julien Prat
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
