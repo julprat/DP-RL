@@ -419,19 +419,19 @@ equipped with the sup norm <span class="math notranslate nohighlight">\(|| y || 
 <p>Use an inductive argument similar to the one in the proof of Theorem 2.5. to establish that, when assumptions 2.1-2.4 hold, <span class="math notranslate nohighlight">\(V\)</span> is concave.</p>
 <details>
 <summary><b>Solution</b></summary>
-<p>Pick <span class="math notranslate nohighlight">\(x_{1},\ x_{2}\in X\)</span> with <span class="math notranslate nohighlight">\(x_{1}\neq x_{2}\)</span>. Let <span class="math notranslate nohighlight">\(\theta\in\left(0,1\right)\)</span>, and <span class="math notranslate nohighlight">\(x_{\theta} = \left(1-\theta\right)x_{1} + \theta x_{2}\)</span>. Since <span class="math notranslate nohighlight">\(\Gamma\)</span> is convex, we have <span class="math notranslate nohighlight">\(g\left(x_{\theta}\right) \in\Gamma\left(x_{\theta}\right)\)</span>, hence</p>
+<p>Pick <span class="math notranslate nohighlight">\(x_{1},\ x_{2}\in X\)</span> with <span class="math notranslate nohighlight">\(x_{1}\neq x_{2}\)</span>. Let <span class="math notranslate nohighlight">\(\theta\in\left(0,1\right)\)</span>, and <span class="math notranslate nohighlight">\(x_{\theta} = \left(1-\theta\right)x_{1} + \theta x_{2}\)</span>. We define <span class="math notranslate nohighlight">\(g^{\theta}(x_1,x_2)=(1-\theta) g(x_1)+\theta g(x_2)\)</span>. Since <span class="math notranslate nohighlight">\(\Gamma\)</span> is convex, we have <span class="math notranslate nohighlight">\(g^{\theta}(x_1,x_2) \in\Gamma\left(x_{\theta}\right)\)</span>. By the optimality of the <span class="math notranslate nohighlight">\(T\)</span> operator, we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    Tf\left(x_{\theta}\right) = F\left(x_{\theta}, g\left(x_{\theta}\right) \right) + \beta f\left(g\left(x_{\theta}\right)\right).\\
+    Tf\left(x_{\theta}\right) \geq F\left(x_{\theta}, g^{\theta}(x_1,x_2)  \right) + \beta f\left(g^{\theta}(x_1,x_2) \right).\\
 \end{align*}\]</div>
-<p>Assuming that <span class="math notranslate nohighlight">\(f\)</span> is strictly concave, we find that</p>
+<p>Assuming that <span class="math notranslate nohighlight">\(f\)</span> is concave, we find that</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    Tf\left(x_{\theta}\right) &amp; = F\left(x_{\theta}, g\left(x_{\theta}\right) \right) + \beta f\left(g\left(x_{\theta}\right)\right)\\
+    Tf\left(x_{\theta}\right) &amp;\geq F\left(x_{\theta}, g^{\theta}(x_1,x_2)  \right) + \beta f\left(g^{\theta}(x_1,x_2) \right)\\
     &amp; &gt; \left(1-\theta\right)[F\left(x_{1}, g\left(x_{1}\right) \right) + \beta f\left(g\left(x_{1}\right)\right)] + \theta [F\left(x_{2}, g\left(x_{2}\right) \right) + \beta f\left(g\left(x_{2}\right)\right)]\\
-    &amp; = \left(1-\theta\right)Tf\left(x_{1}\right) + \beta Tf\left(x_{2}\right).\\
+    &amp; = \left(1-\theta\right)Tf\left(x_{1}\right) + \theta Tf\left(x_{2}\right).\\
 \end{align*}\]</div>
-<p>The second equality follows from the concavity of <span class="math notranslate nohighlight">\(F\)</span> and the premise that <span class="math notranslate nohighlight">\(f\)</span> is also concave. Since <span class="math notranslate nohighlight">\(V = TV\)</span>, we conclude that <span class="math notranslate nohighlight">\(V\)</span> is concave.</p>
+<p>The second equality follows from the strict concavity of <span class="math notranslate nohighlight">\(F\)</span> with respect to its second argument, and the premise that <span class="math notranslate nohighlight">\(f\)</span> is also concave. Since <span class="math notranslate nohighlight">\(V = \lim_{n\rightarrow \infty}T^nV_0\)</span>, and the space of concave functions is the closure of the space of strictly concave functions, assuming that <span class="math notranslate nohighlight">\(V_0\)</span> is concave, we can conclude that <span class="math notranslate nohighlight">\(V\)</span> is concave.</p>
 </section>
 </section>
 <section id="additional-exercises">
