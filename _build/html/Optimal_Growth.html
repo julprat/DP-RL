@@ -1,0 +1,1228 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Growth &#8212; DP &amp; RL for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Optimal_Growth';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Bellman Equation" href="Bellman_Equation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="DP & RL for Economists - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="DP & RL for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Recursive_Problem.html">Sequential &amp; Recursive Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bellman_Equation.html">Bellman Equation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Growth</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub/issues/new?title=Issue%20on%20page%20%2FOptimal_Growth.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Optimal_Growth.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Growth</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-from-the-class-notes">Exercises from the Class Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-1">Exercise 3.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-2">Exercise 3.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-3">Exercise 3.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-exercises">Additional Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-4-sufficiency-of-euler-and-transversality-conditions">Exercise 3.4 (Sufficiency of Euler and transversality conditions)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-5">Exercise 3.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-6">Exercise 3.6</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-diagram">Phase Diagram</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="growth">
+<h1>Growth<a class="headerlink" href="#growth" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/julprat/CourseDP_hub/blob/main/Optimal_Growth.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section id="exercises-from-the-class-notes">
+<h2>Exercises from the Class Notes<a class="headerlink" href="#exercises-from-the-class-notes" title="Link to this heading">#</a></h2>
+<section id="exercise-3-1">
+<h3>Exercise 3.1<a class="headerlink" href="#exercise-3-1" title="Link to this heading">#</a></h3>
+<p>Assume that (A1)-(A3) hold. Which of the assumptions presented in Lectures 1 and 2 are satisfied?</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>Assumptions A1.1, A1.2, A2.1, A2.3, and A2.4. In assumption A2.2, <span class="math notranslate nohighlight">\(F\)</span> is not bounded under (A1)-(A3). However, we can assume that capital is at most equal to the maximum maintainable capital stock.</p>
+</section>
+<section id="exercise-3-2">
+<h3>Exercise 3.2<a class="headerlink" href="#exercise-3-2" title="Link to this heading">#</a></h3>
+<p>Show that, for any <span class="math notranslate nohighlight">\(k_0 \in (0,k_{max}]\)</span>, the optimal sequence <span class="math notranslate nohighlight">\(\{k_t\}_{t=0}^{\infty}\)</span> defined by <span class="math notranslate nohighlight">\(k_{t+1}=g(k_t)\)</span> converges monotonically to <span class="math notranslate nohighlight">\(k^*=f'^{-1}(1/\beta)\)</span>.</p>
+<details>
+<summary><b>Solution</b></summary>
+<p>From fact that <span class="math notranslate nohighlight">\(v\)</span> is strictly concave, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \{v^{'}\left(k\right) - v^{'}[g\left(k\right)]\}[k - g\left(k\right)]\leq 0, \forall k\in (0,\overline{k}],
+\end{equation*}\]</div>
+<p>with equality iff <span class="math notranslate nohighlight">\(g\left(k\right) = k\)</span>. By the FOC and EC conditions and use the fact that <span class="math notranslate nohighlight">\(U^{'}\left(c\right)&gt;0\)</span>, we can conclude that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    [f^{'}\left(k\right) - \frac{1}{\beta}][k - g\left(k\right)]\leq 0, \forall k\in (0,\overline{k}], 
+\end{equation*}\]</div>
+<p>with equality iff <span class="math notranslate nohighlight">\(g\left(k\right) = k\)</span>. Since <span class="math notranslate nohighlight">\(f\)</span> is concave, it follows that <span class="math notranslate nohighlight">\(f^{'}\left(k\right) \stackrel{&gt;}{&lt;} \frac{1}{\beta}\)</span> as <span class="math notranslate nohighlight">\(k\stackrel{&lt;}{&gt;} k^{*}\)</span> and <span class="math notranslate nohighlight">\(k \stackrel{&gt;}{&lt;} g\left(k\right)\)</span> that as <span class="math notranslate nohighlight">\(k \stackrel{&gt;}{&lt;} k^{*}\)</span>.</p>
+<p>Consider the optimal sequence <span class="math notranslate nohighlight">\(\{k_t\}_{t=0}^{\infty}\)</span> defined by <span class="math notranslate nohighlight">\(k_{t+1}=g(k_t)\)</span>. If <span class="math notranslate nohighlight">\(k_{t} \geq k^{*}\)</span>, then <span class="math notranslate nohighlight">\(k_{t+1} \leq  g\left(k_{t}\right)\)</span>, decreasing monotonically until <span class="math notranslate nohighlight">\(k = k^{*}\)</span>. Likewise, if <span class="math notranslate nohighlight">\(k_{t} \leq k^{*}\)</span>, then <span class="math notranslate nohighlight">\(k_{t+1} \geq  g\left(k_{t}\right)\)</span>, increasing monotonically until <span class="math notranslate nohighlight">\(k = k^{*}\)</span>. Therefore the optimal sequence <span class="math notranslate nohighlight">\(\{k_t\}_{t=0}^{\infty}\)</span> converges monotonically to <span class="math notranslate nohighlight">\(k^{*}\)</span>.</p>
+</section>
+<section id="exercise-3-3">
+<h3>Exercise 3.3<a class="headerlink" href="#exercise-3-3" title="Link to this heading">#</a></h3>
+<p>Write a code in Python that uses an iterative procedure to solve for the value function of the optimal growth model.</p>
+<p><strong>Solution</strong></p>
+<p>Below is a draft of the code. You have to complete its commented sections starting with ‘#Your code goes here’ to make it work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Sun Nov 18 14:37:30 2018</span>
+<span class="sd">@author: Bruno</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#==============================================================================</span>
+<span class="c1"># Recursive Methods - Optimal Growth</span>
+<span class="c1">#==============================================================================</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fminbound</span>
+
+
+<span class="k">def</span> <span class="nf">bellman_operator</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">Tw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compute_policy</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="c1"># === Apply linear interpolation to w === #</span>
+    <span class="n">w_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+    <span class="c1"># == Initialize Tw if necessary == #</span>
+    <span class="k">if</span> <span class="n">Tw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">Tw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">compute_policy</span><span class="p">:</span>
+        <span class="n">σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="c1"># == set Tw[i] = max_c { u(c) + β E w(f(y  - c) z)} == #</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">):</span>
+            <span class="k">return</span> <span class="c1">#Your code goes here</span>
+        <span class="n">c_star</span> <span class="o">=</span> <span class="n">fminbound</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">compute_policy</span><span class="p">:</span>
+            <span class="c1">#σ[i] = c_star</span>
+            <span class="c1">#σ[i] = y - c_star #capital at date t</span>
+            <span class="n">σ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="c1">#Your code goes here #y_(t+1) as a function of y_t</span>
+        <span class="n">Tw</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="c1">#Your code goes here</span>
+
+    <span class="k">if</span> <span class="n">compute_policy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Tw</span><span class="p">,</span> <span class="n">σ</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Tw</span>
+
+
+
+<span class="k">def</span> <span class="nf">solve_optgrowth</span><span class="p">(</span><span class="n">initial_w</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+
+    <span class="n">w</span> <span class="o">=</span> <span class="n">initial_w</span>  <span class="c1"># Set initial condition</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">tol</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># == Create storage array for bellman_operator. Reduces  memory</span>
+    <span class="c1"># allocation and speeds code up == #</span>
+    <span class="n">Tw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span>
+
+    <span class="c1"># Iterate to find solution</span>
+    <span class="k">while</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="n">tol</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">:</span>
+        <span class="n">w_new</span> <span class="o">=</span> <span class="n">bellman_operator</span><span class="p">(</span><span class="n">w</span><span class="p">,</span>
+                                 <span class="n">grid</span><span class="p">,</span>
+                                 <span class="n">β</span><span class="p">,</span>
+                                 <span class="n">u</span><span class="p">,</span>
+                                 <span class="n">f</span><span class="p">,</span>
+                                 <span class="n">Tw</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="c1">#Your code goes here </span>
+        <span class="n">w</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">w_new</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iteration &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Error is &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="n">tol</span> <span class="k">else</span> <span class="kc">None</span>
+
+        
+    <span class="c1"># Computes policy</span>
+    <span class="n">policy</span> <span class="o">=</span> <span class="n">bellman_operator</span><span class="p">(</span><span class="n">w</span><span class="p">,</span>
+                             <span class="n">grid</span><span class="p">,</span>
+                             <span class="n">β</span><span class="p">,</span>
+                             <span class="n">u</span><span class="p">,</span>
+                             <span class="n">f</span><span class="p">,</span>
+                             <span class="n">Tw</span><span class="p">,</span>
+                             <span class="n">compute_policy</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+ 
+    <span class="k">return</span> <span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">policy</span><span class="p">]</span>
+
+
+
+<span class="k">class</span> <span class="nc">CES_OG</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constant elasticity of substitution optimal growth model so that</span>
+
+<span class="sd">        y = f(k) = k^α</span>
+
+
+<span class="sd">    The class holds parameters and true value and policy functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.96</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">sigma</span> 
+
+    <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="s2">&quot; Utility &quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="s2">&quot; Deterministic part of production function.  &quot;</span>
+        <span class="k">return</span> <span class="n">k</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">α</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">35</span>
+    <span class="n">σ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="c1">#Your code goes here #y_(t+1) as a function of y_t</span>
+           <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creation of the model</span>
+<span class="n">ces</span> <span class="o">=</span> <span class="n">CES_OG</span><span class="p">()</span>
+<span class="c1"># == Unpack parameters / functions for convenience == #</span>
+<span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">ces</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">ces</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="n">ces</span><span class="o">.</span><span class="n">sigma</span>
+
+
+<span class="c1">### Setup of the grid</span>
+<span class="n">grid_max</span> <span class="o">=</span> <span class="mi">1</span>         <span class="c1"># Largest grid point</span>
+<span class="n">grid_size</span> <span class="o">=</span> <span class="mi">200</span>      <span class="c1"># Number of grid points</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">grid_max</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span>
+
+<span class="c1"># Initial conditions and shocks</span>
+<span class="n">initial_w</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+
+<span class="c1"># Computation of the value function</span>
+<span class="n">solve</span> <span class="o">=</span> <span class="n">solve_optgrowth</span><span class="p">(</span><span class="n">initial_w</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">ces</span><span class="o">.</span><span class="n">u</span><span class="p">,</span>
+                               <span class="n">f</span><span class="o">=</span><span class="n">ces</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">value_approx</span> <span class="o">=</span> <span class="n">solve</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">policy_function</span> <span class="o">=</span> <span class="n">solve</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 50
+ Error is 0.13013875164658373
+
+Iteration 100
+ Error is 0.01690317836253641
+
+Iteration 150
+ Error is 0.002195483316992153
+
+Iteration 200
+ Error is 0.000285165329962922
+
+Iteration 226
+ Error is 9.86611846087726e-05
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#==============================================================================</span>
+<span class="c1"># Plotting value function</span>
+<span class="c1">#==============================================================================</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">value_approx</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">value_approx</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">value_approx</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;approximate value function&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a65c60db014a620c5276014ca64dd007ea7c18b7c515d505189f9e313d8b95ce.png" src="_images/a65c60db014a620c5276014ca64dd007ea7c18b7c515d505189f9e313d8b95ce.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#==============================================================================</span>
+<span class="c1"># Plotting Policy function</span>
+<span class="c1">#==============================================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">policy_function</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">policy_function</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">policy_function</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;approximate policy function&#39;</span><span class="p">)</span>
+
+<span class="c1"># 45° line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;45 degrees line&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;y_t&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y_(t+1)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b7052be3cf0d9bf2079d0242427689577ae4db193ee0e9585f00e2705250933.png" src="_images/0b7052be3cf0d9bf2079d0242427689577ae4db193ee0e9585f00e2705250933.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="additional-exercises">
+<h2>Additional Exercises<a class="headerlink" href="#additional-exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-3-4-sufficiency-of-euler-and-transversality-conditions">
+<h3>Exercise 3.4 (Sufficiency of Euler and transversality conditions)<a class="headerlink" href="#exercise-3-4-sufficiency-of-euler-and-transversality-conditions" title="Link to this heading">#</a></h3>
+<p>Assume that the Assumptions in Lecture 2 are satisfied.</p>
+<ol class="arabic simple">
+<li><p>Show that the sequence <span class="math notranslate nohighlight">\(\{x^*_{t+1}\}_{t=0}^{\infty}\)</span> with <span class="math notranslate nohighlight">\(x^*_{t+1}\in\Gamma(x_t)\)</span> for all <span class="math notranslate nohighlight">\(t\geq 0\)</span>, is optimal for the Sequential Problem if it satisfies the Euler equation and the following transversality condition: <span class="math notranslate nohighlight">\(\lim_{t\rightarrow \infty} \beta^t F_1(x^*_{t},x^*_{t+1})\cdot x^*_{t}=0\)</span>.</p></li>
+<li><p>Can we replace the transversality condition in 1 with that of the recursive problem: <span class="math notranslate nohighlight">\(\lim_{t\rightarrow \infty} \beta^t V(x^*_{t})=0\)</span>?</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>It is sufficient to show that the difference between the objective function in the sequential problem evaluated at <span class="math notranslate nohighlight">\(\{x^{*}\}\)</span> and at <span class="math notranslate nohighlight">\(\{x_{t}\}\)</span> is nonnegative.</p></li>
+</ol>
+<p>Since <span class="math notranslate nohighlight">\(F\)</span> is continuous, concave, and differentiable,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    D &amp;= \lim_{T\rightarrow \infty}\sum_{t = 0}^{T} \beta^{t}[F\left(x^{*}_{t}, x_{t+1}^{*}\right) - F\left(x_{t}, x_{t+1}\right)]\\
+      &amp;\geq \lim_{T\rightarrow \infty}\sum_{t = 0}^{T} \beta^{t}[F_{x}\left(x^{*}_{t}, x_{t+1}^{*}\right)\left(x^{*}_{t}-x_{t}\right) + F_{y}\left(x^{*}_{t}, x_{t+1}^{*}\right)\left(x^{*}_{t+1}-x_{t+1}\right)].
+\end{align*}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(x_{0}^{*} - x_{0} = 0\)</span>, rearranging terms givees</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    D \geq \lim_{T\rightarrow \infty}\{\sum_{t = 0}^{T-1} \beta^{t}[F_{y}\left(x^{*}_{t}, x_{t+1}^{*}\right) + \beta F_{x}\left(x^{*}_{t+1}, x_{t+2}^{*}\right)]\left(x^{*}_{t+1}-x_{t+1}\right) + \beta^{T} F_{y}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T+1}-x_{T+1}\right)\}.
+\end{equation*}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\{x^{*}\}\)</span> satisfies the FOC, the terms in the summation are all zero. Therefore, by the FOC and EC,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    D &amp;\geq -\lim_{T\rightarrow \infty}\beta^{T} F_{x}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T}-x_{T}\right)\\
+      &amp;\geq -\lim_{T\rightarrow \infty}\beta^{T} F_{x}\left(x^{*}_{T}, x_{T+1}^{*}\right)x^{*}_{T}.
+\end{align*}\]</div>
+<p>It then follows that <span class="math notranslate nohighlight">\(D\geq 0\)</span>, establishing the desired result.</p>
+<ol class="arabic simple" start="2">
+<li><p>Yes, because the value function is concave in this setting.</p></li>
+</ol>
+</section>
+<section id="exercise-3-5">
+<h3>Exercise 3.5<a class="headerlink" href="#exercise-3-5" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\(\bar{k}=f(\bar{k})\)</span> denote the maximum maintainable capital stock. Show that the standard assumptions on <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(U\)</span> ensure that for any <span class="math notranslate nohighlight">\(k\in(0,\bar{k}]\)</span>, the solution of the Bellman equation is at an interior value for <span class="math notranslate nohighlight">\(k'\)</span>, so that <span class="math notranslate nohighlight">\(v\)</span> is continuously differentiable on <span class="math notranslate nohighlight">\((0,\bar{k}]\)</span>, and that the FOC and Envelope Condition (EC) hold for all <span class="math notranslate nohighlight">\(k\in(0,\bar{k}]\)</span>.</p></li>
+<li><p>Use the EC to show that the policy function <span class="math notranslate nohighlight">\(g(k)\)</span> is strictly increasing.</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>Pick any <span class="math notranslate nohighlight">\(k\in (0,\overline{k}]\)</span>. To see that <span class="math notranslate nohighlight">\(g\left(k\right) \in \left(0,\overline{k}\right)\)</span>, suppose <span class="math notranslate nohighlight">\(g\left(k\right) = 0\)</span>. Then,</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    U^{'}[f\left(k\right)]\geq \beta v^{'}\left(0\right) = \beta U^{'}[f\left(0\right) - g\left(0\right)]f^{'}\left(0\right)
+\end{equation*}\]</div>
+<p>but the left-hand side is finite while the right-had side is not. There <span class="math notranslate nohighlight">\(k\left(k\right) = 0\)</span> cannot not be optimal.</p>
+<p>Suppose then <span class="math notranslate nohighlight">\(g\left(k\right) = \overline{k}\)</span>. Because <span class="math notranslate nohighlight">\(k\in (0,\overline{k}]\)</span>, and consumption is nonnegative, it must be that <span class="math notranslate nohighlight">\(k = \overline{k}\)</span>. Hence,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    U^{'}[f\left(\overline{k}\right)-\overline{k}]\leq \beta v^{'}\left(\overline{k}\right) = \beta U^{'}[f\left(\overline{k}\right) - g\left(\overline{k}\right)]f^{'}\left(\overline{k}\right),
+\end{equation*}\]</div>
+<p>but the left-hand side of the inequality stated above is not finite. On the other hand, feasibility requires that <span class="math notranslate nohighlight">\(g\left(\overline{k}\right)\leq \overline{k}\)</span>. If <span class="math notranslate nohighlight">\(g\left(\overline{k}\right)= \overline{k}\)</span>, this implies zero consumption even after, which is suboptimal. Hence <span class="math notranslate nohighlight">\(g\left(\overline{k}\right)&lt; \overline{k}\)</span>. But</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \infty = U^{'}\left(0\right) = U^{'}[f\left(\overline{k}\right) - \overline{k}]\leq \beta U^{'}[f\left(\overline{k}\right) - g\left(\overline{k}\right)]f^{'}\left(\overline{k}\right),
+\end{equation*}\]</div>
+<p>and the right-hand side is finite, which is a contradiction. Therefore, the solution of the Bellman equation is an interior value for <span class="math notranslate nohighlight">\(k^{'}\)</span>. By Theorem 4.11 (Differentiability of the value function), v is contiunously differentiable on <span class="math notranslate nohighlight">\((0,\overline{k}]\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p>Pick <span class="math notranslate nohighlight">\(k,\ k^{'}\in (0,\overline{k}]\)</span>, with <span class="math notranslate nohighlight">\(k&lt;k^{'}\)</span>. Suppose <span class="math notranslate nohighlight">\(g\left(k\right)\geq g\left(k^{'}\right)\)</span>. Then <span class="math notranslate nohighlight">\(v\)</span> being strictly concave implies</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta v^{'}[g\left(k^{'}\right)] = U^{'}[f\left(k^{'}\right)-g\left(k^{'}\right)].
+\end{equation*}\]</div>
+<p>Hence, by <span class="math notranslate nohighlight">\(U\)</span> being strictly concave,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    f\left(k\right) - g\left(k\right)\geq f\left(k^{'}\right) - g\left(k^{'}\right).
+\end{equation*}\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(f\)</span> being strictily increasing implies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    g\left(k^{'}\right) - g\left(k\right)\geq f\left(k^{'}\right) - f\left(k^{'}\right)&gt;0,
+\end{equation*}\]</div>
+<p>and so <span class="math notranslate nohighlight">\(g\left(k^{'}\right)&gt;g\left(k\right)\)</span>, which is a contraction.</p>
+</section>
+<section id="exercise-3-6">
+<h3>Exercise 3.6<a class="headerlink" href="#exercise-3-6" title="Link to this heading">#</a></h3>
+<p>Consider a modification of the canonical growth model where capital goods are produced using only labor. We endow the consumer with one unit labor, and assume that <span class="math notranslate nohighlight">\(c_t=n_tf(k_t/n_t) \text{ and } k_{t+1}=1-n_t.\)</span> We also assume that <span class="math notranslate nohighlight">\(\lim_{n\rightarrow 0} nf(k,n)=0\)</span> for all <span class="math notranslate nohighlight">\(k\in[0,1]\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Write the Bellman equation. Derive the FOC and EC.</p></li>
+<li><p>Find a necessary condition that must be satisfied by the stationary capital stock. Prove that it indeed identifies the steady-state.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(U(c)=c^{\alpha}\)</span> with <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(f(x)=x^{\theta}\)</span> with <span class="math notranslate nohighlight">\(\theta \in (0,1)\)</span>. Use the FOC to show that the policy function <span class="math notranslate nohighlight">\(g(k)\)</span> is strictly decreasing on <span class="math notranslate nohighlight">\([0,1]\)</span>.</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>The Bellman equation can be written as</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    v\left(k_{t}\right) = \max_{k_{t+1}\in [0,1]} \{U[\left(1-k_{t+1}\right)f\left(\frac{k_{t}}{1-k_{t+1}}\right)] + \beta v\left(k_{t+1}\right)\}.
+\end{equation*}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(g\)</span> denote the policy funtion. The first-order and envelope conditions are given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    U^{'}\left([1-g\left(k_{t}\right)]f[\frac{k_{t}}{1-g\left(k_{t}\right)}]\right) \times \{f[\frac{k_{t}}{1-g\left(k_{t}\right)}]-\frac{k_{t}}{1-g\left(k_{t}\right)}f^{'}[\frac{k_{t}}{1-g\left(k_{t}\right)}]\} = \beta v^{'}[g\left(k_{t}\right)]
+\end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    v^{'}\left(k_{t}\right) = U^{'}\left([1-g\left(k_{t}\right)]f[\frac{k_{t}}{1-g\left(k_{t}\right)}]\right)f^{'}[\frac{k_{t}}{1-g\left(k_{t}\right)}].
+
+\end{equation*}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Setting <span class="math notranslate nohighlight">\(g\left(k_{t}\right) = k_{t}\)</span> and eliminating <span class="math notranslate nohighlight">\(k_{t}^{'}\)</span>, a necessary condition for a stationary point is</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    f\left(\frac{k_{t}}{1-k_{t}}\right)-\left(\frac{k_{t}}{1-k_{t}} + \beta\right)f^{'}\left(\frac{k_{t}}{1-k_{t}}\right) = 0.
+\end{equation*}\]</div>
+<p>By the assumptions on <span class="math notranslate nohighlight">\(f\)</span>, the equation above has exactly one solution, denoted as <span class="math notranslate nohighlight">\(k^{*}\)</span>. Since <span class="math notranslate nohighlight">\(v\)</span> is strictly concave, the condition in Exercise 3.2 holds. Substituting from the FOC and EC, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\{[\beta + \frac{k_{t}}{1-g\left(k_{t}\right)}]f^{'}[\frac{k_{t}}{1-g\left(k_{t}\right)}] + f[\frac{k_{t}}{1-g\left(k_{t}\right)}]\}[k_{t}-g\left(k_{t}\right)]\leq 0
+\end{equation*}\]</div>
+<p>with equality only if <span class="math notranslate nohighlight">\(g\left(k_{t}\right) = k_{t}\)</span>. Therefore <span class="math notranslate nohighlight">\(k^{*}\)</span> is indeed a stationary point.</p>
+<ol class="arabic simple" start="3">
+<li><p>Pick <span class="math notranslate nohighlight">\(k,\ k^{'}\in (0,\overline{k}]\)</span>, with <span class="math notranslate nohighlight">\(k&lt;k^{'}\)</span>. Suppose <span class="math notranslate nohighlight">\(g\left(k\right)\geq g\left(k^{'}\right)\)</span>. With the specific function forms, the FOC is given by</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \alpha [\left(1-g\left(k\right)\right)\left(\frac{k}{1-g\left(k\right)}\right)^{\theta}]^{\alpha-1}[\left(\frac{k}{1-g\left(k\right)}\right)^{\theta} - \frac{\theta k}{1-g\left(k\right)}\left(\frac{k}{1-g\left(k\right)}\right)^{\theta-1}] = \beta v^{'}[g\left(k\right)].
+\end{equation*}\]</div>
+<p>As <span class="math notranslate nohighlight">\(v\)</span> is strictly concave, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp; \alpha [\left(1-g\left(k^{'}\right)\right)\left(\frac{k^{'}}{1-g\left(k^{'}\right)}\right)^{\theta}]^{\alpha-1}[\left(\frac{k^{'}}{1-g\left(k^{'}\right)}\right)^{\theta} - \frac{\theta k^{'}}{1-g\left(k^{'}\right)}\left(\frac{k^{'}}{1-g\left(k^{'}\right)}\right)^{\theta-1}]\\
+    
+    &amp; \leq \alpha [\left(1-g\left(k\right)\right)\left(\frac{k}{1-g\left(k\right)}\right)^{\theta}]^{\alpha-1}[\left(\frac{k}{1-g\left(k\right)}\right)^{\theta} - \frac{\theta k}{1-g\left(k\right)}\left(\frac{k}{1-g\left(k\right)}\right)^{\theta-1}],
+\end{align*}\]</div>
+<p>which implies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    1 &lt; \frac{k^{'}}{k}&lt;[\frac{1-g\left(k^{'}\right)}{1-g\left(k\right)}]^{\gamma},
+\end{equation*}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \gamma = -[\frac{\left(1-\theta\right)\left(\alpha-1\right)-\theta}{\theta\alpha}]&gt;0.
+\end{equation*}\]</div>
+<p>Hence,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \frac{1-g\left(k^{'}\right)}{1-g\left(k\right)}&gt;1,
+\end{equation*}\]</div>
+<p>and so <span class="math notranslate nohighlight">\(g\left(k^{'}\right)&lt;g\left(k\right)\)</span>, which is a contradiction.</p>
+</section>
+</section>
+<section id="phase-diagram">
+<h2>Phase Diagram<a class="headerlink" href="#phase-diagram" title="Link to this heading">#</a></h2>
+<p>The code below is borrowed from <a class="reference external" href="https://python.quantecon.org/cass_koopmans_1.html">QuantEcon</a></p>
+<p>It displays the phase diagram of the infinite horizon growth model when</p>
+<ol class="arabic simple">
+<li><p>Utility function is CRRA: <span class="math notranslate nohighlight">\(U(c)=\frac{c^{1-\gamma}}{1-\gamma}\)</span>;</p></li>
+<li><p>Production function is Cobb-Douglas with fixed labor supply: <span class="math notranslate nohighlight">\(F(K,1)=K^{\alpha}\)</span>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span><span class="p">,</span> <span class="n">float64</span>
+<span class="kn">from</span> <span class="nn">numba.experimental</span> <span class="kn">import</span> <span class="n">jitclass</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">quantecon.optimize</span> <span class="kn">import</span> <span class="n">brentq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first define a <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/user/jitclass.html">jitclass</a> that stores parameters and functions that define our economy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planning_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;γ&#39;</span><span class="p">,</span> <span class="n">float64</span><span class="p">),</span>    <span class="c1"># Coefficient of relative risk aversion</span>
+    <span class="p">(</span><span class="s1">&#39;β&#39;</span><span class="p">,</span> <span class="n">float64</span><span class="p">),</span>    <span class="c1"># Discount factor</span>
+    <span class="p">(</span><span class="s1">&#39;δ&#39;</span><span class="p">,</span> <span class="n">float64</span><span class="p">),</span>    <span class="c1"># Depreciation rate on capital</span>
+    <span class="p">(</span><span class="s1">&#39;α&#39;</span><span class="p">,</span> <span class="n">float64</span><span class="p">),</span>    <span class="c1"># Return to capital per capita</span>
+    <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">float64</span><span class="p">)</span>     <span class="c1"># Technology</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jitclass</span><span class="p">(</span><span class="n">planning_data</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">PlanningProblem</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">γ</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">δ</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">γ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">γ</span><span class="p">,</span> <span class="n">β</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">δ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">δ</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">A</span>
+
+    <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Utility function</span>
+<span class="sd">        ASIDE: If you have a utility function that is hard to solve by hand</span>
+<span class="sd">        you can use automatic or symbolic differentiation</span>
+<span class="sd">        See https://github.com/HIPS/autograd</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">γ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ</span>
+
+        <span class="k">return</span> <span class="n">c</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ</span><span class="p">)</span> <span class="k">if</span> <span class="n">γ</span><span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">u_prime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="s1">&#39;Derivative of utility&#39;</span>
+        <span class="n">γ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ</span>
+
+        <span class="k">return</span> <span class="n">c</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">γ</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">u_prime_inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="s1">&#39;Inverse of derivative of utility&#39;</span>
+        <span class="n">γ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ</span>
+
+        <span class="k">return</span> <span class="n">c</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">γ</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="s1">&#39;Production function&#39;</span>
+        <span class="n">α</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span>
+
+        <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="n">α</span>
+
+    <span class="k">def</span> <span class="nf">f_prime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="s1">&#39;Derivative of production function&#39;</span>
+        <span class="n">α</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span>
+
+        <span class="k">return</span> <span class="n">α</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="p">(</span><span class="n">α</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">f_prime_inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="s1">&#39;Inverse of derivative of production function&#39;</span>
+        <span class="n">α</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">α</span><span class="p">))</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">α</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">next_k_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;&#39;</span>
+<span class="sd">        Given the current capital Kt and an arbitrary feasible</span>
+<span class="sd">        consumption choice Ct, computes Kt+1 by state transition law</span>
+<span class="sd">        and optimal Ct+1 by Euler equation.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">β</span><span class="p">,</span> <span class="n">δ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">δ</span>
+        <span class="n">u_prime</span><span class="p">,</span> <span class="n">u_prime_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_prime</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_prime_inv</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">f_prime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_prime</span>
+
+        <span class="n">k_next</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span> <span class="o">-</span> <span class="n">c</span>
+        <span class="n">c_next</span> <span class="o">=</span> <span class="n">u_prime_inv</span><span class="p">(</span><span class="n">u_prime</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">β</span> <span class="o">*</span> <span class="p">(</span><span class="n">f_prime</span><span class="p">(</span><span class="n">k_next</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">δ</span><span class="p">))))</span>
+
+        <span class="k">return</span> <span class="n">k_next</span><span class="p">,</span> <span class="n">c_next</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create economy instance</span>
+<span class="n">pp</span> <span class="o">=</span> <span class="n">PlanningProblem</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute stable manifold for Consumption</span>
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">C_tilde</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">pp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pp</span><span class="o">.</span><span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span> <span class="o">-</span> <span class="n">pp</span><span class="o">.</span><span class="n">f_prime_inv</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">pp</span><span class="o">.</span><span class="n">β</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">pp</span><span class="o">.</span><span class="n">δ</span><span class="p">)</span>
+
+<span class="c1"># Compute stable manifold for Capital</span>
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">K_diff</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">pp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">pp</span><span class="o">.</span><span class="n">δ</span> <span class="o">*</span> <span class="n">K</span> <span class="o">-</span> <span class="n">C</span>
+
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">K_tilde</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">K_diff</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">pp</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">root</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute steady-state by combining the two stable manifolds</span>
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">K_tilde_diff</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
+
+    <span class="n">K_out</span> <span class="o">=</span> <span class="n">K_tilde</span><span class="p">(</span><span class="n">C_tilde</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">pp</span><span class="p">),</span> <span class="n">pp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">K</span> <span class="o">-</span> <span class="n">K_out</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">K_tilde_diff</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">pp</span><span class="p">,))</span>
+
+<span class="n">Ks</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">root</span>
+<span class="n">Cs</span> <span class="o">=</span> <span class="n">C_tilde</span><span class="p">(</span><span class="n">Ks</span><span class="p">,</span> <span class="n">pp</span><span class="p">)</span>
+
+<span class="n">Ks</span><span class="p">,</span> <span class="n">Cs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9.575838163314447, 1.9160839808123402)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implements the shooting algorithm for the planning problem.</span>
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">shooting</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Given the initial condition of capital k0 and an initial guess</span>
+<span class="sd">    of consumption c0, computes the whole paths of c and k</span>
+<span class="sd">    using the state transition law and Euler equation for T periods.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">c0</span> <span class="o">&gt;</span> <span class="n">pp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">k0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pp</span><span class="o">.</span><span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">k0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;initial consumption is not feasible&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># initialize vectors of c and k</span>
+    <span class="n">c_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">k_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">c_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c0</span>
+    <span class="n">k_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">k0</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">k_vec</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_vec</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">next_k_c</span><span class="p">(</span><span class="n">k_vec</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">c_vec</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+
+    <span class="n">k_vec</span><span class="p">[</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">k_vec</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pp</span><span class="o">.</span><span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_vec</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">-</span> <span class="n">c_vec</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">c_vec</span><span class="p">,</span> <span class="n">k_vec</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a bisection method to match the terminal condition</span>
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">bisection</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">k_ter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="c1"># initial boundaries for guess c0</span>
+    <span class="n">c0_upper</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">k0</span><span class="p">)</span>
+    <span class="n">c0_lower</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">c_vec</span><span class="p">,</span> <span class="n">k_vec</span> <span class="o">=</span> <span class="n">shooting</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">k_vec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">k_ter</span>
+
+        <span class="c1"># check if the terminal condition is satisfied</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converged successfully on iteration &#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">c_vec</span><span class="p">,</span> <span class="n">k_vec</span>
+
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Convergence failed.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">c_vec</span><span class="p">,</span> <span class="n">k_vec</span>
+
+        <span class="c1"># if iteration continues, updates boundaries and guess of c0</span>
+        <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">c0_lower</span> <span class="o">=</span> <span class="n">c0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c0_upper</span> <span class="o">=</span> <span class="n">c0</span>
+
+        <span class="n">c0</span> <span class="o">=</span> <span class="p">(</span><span class="n">c0_lower</span> <span class="o">+</span> <span class="n">c0_upper</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now compute two trajectories towards the steady-state that start from different sides of K_{S}.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_vec1</span><span class="p">,</span> <span class="n">k_vec1</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">k_ter</span><span class="o">=</span><span class="n">Ks</span><span class="p">)</span>
+<span class="n">c_vec2</span><span class="p">,</span> <span class="n">k_vec2</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">k_ter</span><span class="o">=</span><span class="n">Ks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converged successfully on iteration  46
+Converged successfully on iteration  52
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Phase Diagram</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">K_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">C_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># C tilde</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">K_range</span><span class="p">,</span> <span class="p">[</span><span class="n">C_tilde</span><span class="p">(</span><span class="n">Ks</span><span class="p">,</span> <span class="n">pp</span><span class="p">)</span> <span class="k">for</span> <span class="n">Ks</span> <span class="ow">in</span> <span class="n">K_range</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">11.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$C=\tilde</span><span class="si">{C}</span><span class="s1">(K)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+<span class="c1"># K tilde</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">K_tilde</span><span class="p">(</span><span class="n">Cs</span><span class="p">,</span> <span class="n">pp</span><span class="p">)</span> <span class="k">for</span> <span class="n">Cs</span> <span class="ow">in</span> <span class="n">C_range</span><span class="p">],</span> <span class="n">C_range</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$K=\tilde</span><span class="si">{K}</span><span class="s1">(C)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="c1"># stable branch</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vec1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_vec1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vec2</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_vec2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">k_vec1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">c_vec1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+          <span class="n">k_vec1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="n">k_vec1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">c_vec1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="n">c_vec1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">k_vec2</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">c_vec2</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+          <span class="n">k_vec2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="n">k_vec2</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">c_vec2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="n">c_vec2</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;stable branch&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+
+<span class="c1"># (Ks, Cs)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ks</span><span class="p">,</span> <span class="n">Cs</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">Ks</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">Cs</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;$(K_s, C_s)$&#39;</span><span class="p">)</span>
+
+<span class="c1"># arrows</span>
+<span class="n">K_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">C_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">K_mesh</span><span class="p">,</span> <span class="n">C_mesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">K_range</span><span class="p">,</span> <span class="n">C_range</span><span class="p">)</span>
+
+<span class="n">next_K</span><span class="p">,</span> <span class="n">next_C</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">next_k_c</span><span class="p">(</span><span class="n">K_mesh</span><span class="p">,</span> <span class="n">C_mesh</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">K_range</span><span class="p">,</span> <span class="n">C_range</span><span class="p">,</span> <span class="n">next_K</span><span class="o">-</span><span class="n">K_mesh</span><span class="p">,</span> <span class="n">next_C</span><span class="o">-</span><span class="n">C_mesh</span><span class="p">)</span>
+
+<span class="c1"># infeasible consumption area</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;infeasible</span><span class="se">\n</span><span class="s2"> consumption&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$K$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b96c320263573c2a1794e59d680a75b1921fc3cc6ddeb198f543747b9ff9a37d.png" src="_images/b96c320263573c2a1794e59d680a75b1921fc3cc6ddeb198f543747b9ff9a37d.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Bellman_Equation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bellman Equation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-from-the-class-notes">Exercises from the Class Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-1">Exercise 3.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-2">Exercise 3.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-3">Exercise 3.3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-exercises">Additional Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-4-sufficiency-of-euler-and-transversality-conditions">Exercise 3.4 (Sufficiency of Euler and transversality conditions)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-5">Exercise 3.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-6">Exercise 3.6</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-diagram">Phase Diagram</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Julien Prat
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+Traceback (most recent call last):
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/julienprat/anaconda3/envs/book/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Nov 18 14:37:30 2018
+@author: Bruno
+"""
+
+#==============================================================================
+# Recursive Methods - Optimal Growth
+#==============================================================================
+
+import os
+import numpy as np
+from scipy.optimize import fminbound
+
+
+def bellman_operator(w, grid, β, u, f, Tw=None, compute_policy=0):
+    # === Apply linear interpolation to w === #
+    w_func = lambda x: np.interp(x, grid, w)
+
+    # == Initialize Tw if necessary == #
+    if Tw is None:
+        Tw = np.empty_like(w)
+
+    if compute_policy:
+        σ = np.empty_like(w)
+
+    # == set Tw[i] = max_c { u(c) + β E w(f(y  - c) z)} == #
+    for i, y in enumerate(grid):
+        def objective(c, y=y):
+            return #Your code goes here
+        c_star = fminbound(objective, 1e-10, y)
+        if compute_policy:
+            #σ[i] = c_star
+            #σ[i] = y - c_star #capital at date t
+            σ[i] = #Your code goes here #y_(t+1) as a function of y_t
+        Tw[i] = #Your code goes here
+
+    if compute_policy:
+        return Tw, σ
+    else:
+        return Tw
+
+
+
+def solve_optgrowth(initial_w, grid, β, u, f, tol=1e-4, max_iter=500):
+
+    w = initial_w  # Set initial condition
+    error = tol + 1
+    i = 0
+
+    # == Create storage array for bellman_operator. Reduces  memory
+    # allocation and speeds code up == #
+    Tw = np.empty(len(grid))
+
+    # Iterate to find solution
+    while error > tol and i < max_iter:
+        w_new = bellman_operator(w,
+                                 grid,
+                                 β,
+                                 u,
+                                 f,
+                                 Tw)
+        error = #Your code goes here 
+        w[:] = w_new
+        i += 1
+        print("Iteration "+str(i)+'\n Error is '+str(error)+'\n') if i % 50 == 0 or error < tol else None
+
+        
+    # Computes policy
+    policy = bellman_operator(w,
+                             grid,
+                             β,
+                             u,
+                             f,
+                             Tw,
+                             compute_policy=1)[1]
+ 
+    return [w, policy]
+
+
+
+class CES_OG:
+    """
+    Constant elasticity of substitution optimal growth model so that
+
+        y = f(k) = k^α
+
+
+    The class holds parameters and true value and policy functions.
+    """
+
+    def __init__(self, α=0.4, β=0.96, sigma=0.9):
+
+        self.α, self.β, self.sigma = α, β, sigma 
+
+    def u(self, c):
+        " Utility "
+        return (c**(1-self.sigma)-1)/(1-self.sigma)
+
+    def f(self, k):
+        " Deterministic part of production function.  "
+        return k**self.α
+
+
+------------------
+
+
+[0;36m  Cell [0;32mIn[1], line 35[0;36m[0m
+[0;31m    σ[i] = #Your code goes here #y_(t+1) as a function of y_t[0m
+[0m           ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+
