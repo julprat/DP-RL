@@ -826,9 +826,8 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
 <span class="p">]</span>
 </pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jitclass</span><span class="p">(</span><span class="n">planning_data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="nd">@jitclass</span><span class="p">(</span><span class="n">planning_data</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">PlanningProblem</span><span class="p">():</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">γ</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">δ</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -893,29 +892,13 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
         <span class="k">return</span> <span class="n">k_next</span><span class="p">,</span> <span class="n">c_next</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@jitclass</span><span class="p">(</span><span class="n">planning_data</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">class</span> <span class="nc">PlanningProblem</span><span class="p">():</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">γ</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">δ</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="bp">self</span><span class="o">.</span><span class="n">γ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">γ</span><span class="p">,</span> <span class="n">β</span>
-
-<span class="ne">NameError</span>: name &#39;jitclass&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># Create economy instance</span>
 <span class="n">pp</span> <span class="o">=</span> <span class="n">PlanningProblem</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute stable manifold for Consumption</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Compute stable manifold for Consumption</span>
 <span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">C_tilde</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">pp</span><span class="p">):</span>
 
@@ -935,8 +918,6 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
     <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">root</span>
 </pre></div>
 </div>
-</div>
-</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># Compute steady-state by combining the two stable manifolds</span>
 <span class="nd">@njit</span>
@@ -954,9 +935,8 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
 <span class="n">Ks</span><span class="p">,</span> <span class="n">Cs</span>
 </pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implements the shooting algorithm for the planning problem.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Implements the shooting algorithm for the planning problem.</span>
 <span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">shooting</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
@@ -984,11 +964,8 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
     <span class="k">return</span> <span class="n">c_vec</span><span class="p">,</span> <span class="n">k_vec</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a bisection method to match the terminal condition</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Use a bisection method to match the terminal condition</span>
 <span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">bisection</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">k_ter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
@@ -1021,8 +998,6 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
 
         <span class="n">c0</span> <span class="o">=</span> <span class="p">(</span><span class="n">c0_lower</span> <span class="o">+</span> <span class="n">c0_upper</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>We now compute two trajectories towards the steady-state that start from different sides of K_{S}.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
