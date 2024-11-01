@@ -437,7 +437,6 @@ document.write(`
 <h3>Exercise 3.3<a class="headerlink" href="#exercise-3-3" title="Link to this heading">#</a></h3>
 <p>Write a code in Python that uses an iterative procedure to solve for the value function of the optimal growth model.</p>
 <p><strong>Solution</strong></p>
-<p>Below is a draft of the code. You have to complete its commented sections starting with ‘#Your code goes here’ to make it work.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -473,8 +472,6 @@ document.write(`
             <span class="k">return</span> <span class="o">-</span> <span class="n">u</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">β</span> <span class="o">*</span> <span class="n">w_func</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">c</span><span class="p">))</span>
         <span class="n">c_star</span> <span class="o">=</span> <span class="n">fminbound</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">compute_policy</span><span class="p">:</span>
-            <span class="c1">#σ[i] = c_star</span>
-            <span class="c1">#σ[i] = y - c_star #capital at date t</span>
             <span class="c1"># σ[i] = #Your code goes here #y_(t+1) as a function of y_t</span>
             <span class="n">σ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">c_star</span><span class="p">)</span> <span class="c1">#y_(t+1) as a function of y_t</span>
         <span class="c1"># Tw[i] = #Your code goes here</span>
@@ -1039,7 +1036,9 @@ U^{'}[f\left(k\right)-g\left(k\right)] = \beta v^{'}[g\left(k\right)]\leq \beta 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converged successfully on iteration  46
-Converged successfully on iteration  52
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converged successfully on iteration  52
 </pre></div>
 </div>
 </div>
