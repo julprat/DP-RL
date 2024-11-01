@@ -4,7 +4,7 @@ This book contains the exercises, code and additional material for the course **
 
 Authors: Julien Prat and Boyang Mu
 
-Academic Year 2024 
+2024 
 
 ```{tableofcontents}
 ```
