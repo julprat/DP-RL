@@ -1,0 +1,908 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Learning &#8212; DP &amp; RL for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Learning';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Growth" href="Optimal_Growth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="DP & RL for Economists - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="DP & RL for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Recursive_Problem.html">Sequential &amp; Recursive Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bellman_Equation.html">Bellman Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Growth</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/julprat/CourseDP_hub/issues/new?title=Issue%20on%20page%20%2FLearning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-learning">Bayesian Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-bernouilli">Exercise 4.1 (Bernouilli)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2-normal-normal-conjugacy">Exercise 4.2 (Normal-Normal conjugacy)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-job-search">Exercise 4.3 (Job Search)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-armed-bandits">Multi-Armed Bandits</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value">Q-Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-exploitation-dilemna">Exploration-Exploitation Dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epsilon-greedy-strategy"><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="learning">
+<h1>Learning<a class="headerlink" href="#learning" title="Link to this heading">#</a></h1>
+<section id="bayesian-learning">
+<h2>Bayesian Learning<a class="headerlink" href="#bayesian-learning" title="Link to this heading">#</a></h2>
+<section id="exercise-4-1-bernouilli">
+<h3>Exercise 4.1 (Bernouilli)<a class="headerlink" href="#exercise-4-1-bernouilli" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(y\)</span> be a random variable that is drawn from a Bernouilli distribution with probability of success <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Consider a dataset <span class="math notranslate nohighlight">\(Y=(y_1,y_2,...,y_n)\)</span> containing <span class="math notranslate nohighlight">\(n\)</span> realizations of <span class="math notranslate nohighlight">\(y\)</span>. Write down the likelihood of <span class="math notranslate nohighlight">\(Y\)</span> as a function of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(p\)</span> itself is drawn from the following distribution</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p=\left\{ 
+\begin{array}{l}
+p_{h}\text{ with probability } \mu _{0}, \\ 
+p_{l}\text{ with probability } 1-\mu _{0}.%
+\end{array}%
+\right. 
+\end{equation*}\]</div>
+<p>The variable <span class="math notranslate nohighlight">\(\mu_0\)</span> denotes the prior in period <span class="math notranslate nohighlight">\(0\)</span>. Use Bayes rule to express the agent’s posterior <span class="math notranslate nohighlight">\(μ_1(0)\)</span> at the beginning of period <span class="math notranslate nohighlight">\(2\)</span> after having observed a failure in period <span class="math notranslate nohighlight">\(1\)</span>, i.e. <span class="math notranslate nohighlight">\(y_1=0\)</span>. Iterate the computation to derive the posterior after <span class="math notranslate nohighlight">\(n\)</span> failures in a row.</p>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>The likelihood of <span class="math notranslate nohighlight">\(Y\)</span> reads</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    L\left(p | Y \right) = \prod_{i = 1}^{n} p^{y_{i}}(1-p)^{1-y_{i}}.
+\end{equation*}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>By Baye’s rule, we can express <span class="math notranslate nohighlight">\(μ_1(0)\)</span> as:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    μ_1(0) = p(p_{h}|y_{1}=0) &amp; = \frac{p(y_{1}=0|p_{h})\mu_{0}}{p(y_{1}=0|p_{h})\mu_{0} + p(y_{1}=0|p_{l})(1-\mu_{0})}\\
+                              &amp; = \frac{(1-p_{h})\mu_{0}}{(1-p_{h})\mu_{0} + (1-p_{l})(1-\mu_{0})}.
+\end{align*}\]</div>
+<p>The posterior after <span class="math notranslate nohighlight">\(n\)</span> failures could be expressed as:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    μ_n(0^n) = p(p_{h}|y_{1}=0, y_{2}=0,...,y_{n}=0) &amp; = \frac{p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{h})\mu_{0}}{p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{h})\mu_{0} + p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{l})(1-\mu_{0})}\\
+                              &amp; = \frac{(1-p_{h})^{n}\mu_{0}}{(1-p_{h})^{n}\mu_{0} + (1-p_{l})^{n}(1-\mu_{0})}.
+\end{align*}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(μ_n\)</span> can be expressed recursively</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    μ_n(0) = \frac{(1-p_{h})\mu_{n-1}}{(1-p_{h})^{n}\mu_{n-1} + (1-p_{l})^{n}(1-\mu_{n-1})}.
+\end{align*}\]</div>
+</section>
+<section id="exercise-4-2-normal-normal-conjugacy">
+<h3>Exercise 4.2 (Normal-Normal conjugacy)<a class="headerlink" href="#exercise-4-2-normal-normal-conjugacy" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(y\)</span> be a random variable that is drawn from a normal distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Consider a dataset <span class="math notranslate nohighlight">\(Y=(y_1,y_2,...,y_n)\)</span> containing <span class="math notranslate nohighlight">\(n\)</span> realizations of <span class="math notranslate nohighlight">\(y\)</span>. Write down the likelihood of <span class="math notranslate nohighlight">\(Y\)</span> as a function of <span class="math notranslate nohighlight">\(\mu\)</span> and  <span class="math notranslate nohighlight">\(\sigma\)</span></p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\mu\)</span> itself is Normally distributed around some mean <span class="math notranslate nohighlight">\(\theta\)</span> with standard deviation <span class="math notranslate nohighlight">\(\tau\)</span>. Show that upon observing <span class="math notranslate nohighlight">\(Y\)</span>, the posterior belief about <span class="math notranslate nohighlight">\(\mu\)</span> remains normally distributed. Derive the posterior mean and standard deviation of <span class="math notranslate nohighlight">\(\mu\)</span>. What do you notice about the standard deviation? Comment your finding.</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>The likelihood of <span class="math notranslate nohighlight">\(Y\)</span> can be written as</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    L\left(\mu, \sigma | Y \right) &amp;= \prod_{i = 1}^{n} f\left(y_{i}|\mu, \sigma\right) \\
+                                   &amp;= \prod_{i = 1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}}\text{exp}\left(-\frac{\left(y_{i}-\mu\right)^{2}}{2\sigma^{2}}\right).
+\end{align*}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>By Bayes’ rule, we find the posterior distribution of <span class="math notranslate nohighlight">\(\mu\)</span> given the data <span class="math notranslate nohighlight">\(Y\)</span>:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+     p\left(\mu|Y,\theta,\tau,\sigma\right) &amp;\propto p\left(Y|\mu,\sigma\right)p\left(\mu|\theta,\tau\right)\\
+        &amp; \propto \text{exp}\left(-\frac{1}{2}\left[\frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\mu\right)^{2} + \frac{\left(\mu-\theta\right)^{2}}{\tau^{2}}\right]\right).
+\end{align*}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\overline{y} = \frac{1}{n}\sum_{i=1}^{n}y_{i}\)</span>, by the Law of Total Variance, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \sum_{i=1}^{n}\left(y_{i}-\mu\right)^{2} = \sum_{i=1}^{n}\left(y_{i} - \overline{y}\right)^{2} + n\left(\overline{y}-\mu\right)^{2}.
+\end{equation*}\]</div>
+<p>Thus the posterior simplifies to:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    p\left(\mu|Y,\theta,\tau,\sigma\right) \propto \text{exp}\left(-\frac{1}{2}\left[\frac{n\left(\overline{y}-\mu\right)^{2}}{\sigma^{2}} + \frac{\left(\mu-\theta\right)^{2}}{\tau^2}\right]\right).
+\end{equation*}\]</div>
+<p>The exponent can be written as:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \left(\mu - \frac{\frac{\overline{y}}{\sigma^{2}} + \frac{\theta}{\tau^{2}}}{\frac{n}{\sigma^{2}} + \frac{1}{\tau^{2}}}\right)^{2}/\left(\frac{n}{\sigma^{2}} + \frac{1}{\tau^{2}}\right).
+\end{equation*}\]</div>
+<p>From this, we can find the posterior mean <span class="math notranslate nohighlight">\(\mu_{post}\)</span> and the posterior variance <span class="math notranslate nohighlight">\(\sigma^{2}_{post}\)</span> to be:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp; \mu_{post} = \frac{\frac{\overline{y}}{\sigma^{2}} + \frac{\theta}{\tau^{2}}}{\frac{n}{\sigma^{2}} + \frac{1}{\tau^{2}}}, \\
+    &amp; \sigma^{2}_{post} = \frac{1}{\frac{n}{\sigma^{2}} + \frac{1}{\tau^{2}}}.
+\end{align*}\]</div>
+<p>Note that the posterior variance is smaller than the prior variance, reflecting the fact that, after observing the data, we have more precise information about <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+</section>
+<section id="exercise-4-3-job-search">
+<h3>Exercise 4.3 (Job Search)<a class="headerlink" href="#exercise-4-3-job-search" title="Link to this heading">#</a></h3>
+<p>We consider a labor market where workers are either employed or searching
+for a job. Time is discrete and agents discount the future at rate <span class="math notranslate nohighlight">\(r\)</span>, so
+that their discount factor <span class="math notranslate nohighlight">\(\beta =1/(1+r).\)</span> When a firm meets a job seeker,
+it offers her a constant wage contract and the firm-employee relationship
+<strong>lasts forever</strong>.</p>
+<p>At the <strong>end</strong> of each period:</p>
+<p>(i). Employed workers receive their wages.</p>
+<p>(ii). Unemployed workers receive their benefits <span class="math notranslate nohighlight">\(z=-1\)</span> along with a job
+offer whose wage is sampled from the following distribution</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+w=
+\left\{ 
+\begin{array}{l}
+1\text{ with probability } p, \\ 
+0\text{ with probability } 1-p.%
+\end{array}
+\right.
+\end{equation*}\]</div>
+<br>
+<ol class="arabic simple">
+<li><p>Write down the Bellman equation for an unemployed worker and
+for a worker employed at wage <span class="math notranslate nohighlight">\(w\)</span>. Reinsert the value function <span class="math notranslate nohighlight">\(E(w)\)</span> of
+employed workers into that of unemployed workers <span class="math notranslate nohighlight">\(U\)</span> to express the latter
+as a function of <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
+<li><p>Consider the following two job searching strategies. One
+where the worker accepts all job offers, which we denote by <span class="math notranslate nohighlight">\(U^{A}\)</span>; and one
+where the worker rejects low-wage offers (<span class="math notranslate nohighlight">\(w=0\)</span>), which we denote by <span class="math notranslate nohighlight">\(U^{R}.\)</span>
+Compute the values of <span class="math notranslate nohighlight">\(U^{A}\)</span> and <span class="math notranslate nohighlight">\(U^{R}.\)</span></p></li>
+<li><p>Under which condition on <span class="math notranslate nohighlight">\(p\)</span> is it optimal for workers to
+reject low-wage offers? Provide an economic intuition for your result.
+(Hint: Remember that <span class="math notranslate nohighlight">\(z=-1.\)</span>)</p></li>
+<li><p>We now assume that the worker search for only two periods.
+What is the value function <span class="math notranslate nohighlight">\(U_{2}\)</span> of an unemployed worker in the second
+and last search period?</p></li>
+<li><p>Consider now the value of being unemployed in the first
+search period <span class="math notranslate nohighlight">\(U_{1}\)</span>. Again, compare two job searching strategies: one
+where the worker accepts all job offers (<span class="math notranslate nohighlight">\(U_{1}^{A}\)</span>); and one where the
+worker rejects low-wage offers (<span class="math notranslate nohighlight">\(U_{1}^{R}\)</span>). Compute the two value
+functions.</p></li>
+<li><p>Under which condition is it optimal to reject low-wage offers
+in the first period? Compare your answer to the solution in 3. Provide
+an interpretation for your finding.</p></li>
+<li><p>We now assume that workers are uncertain about the probability
+<span class="math notranslate nohighlight">\(p\)</span> at which they receive high-wage offers. Their initial belief at the
+beginning of period 1 is given by</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p=\left\{ 
+\begin{array}{l}
+p_{h}\text{ with probability } \mu _{1}, \\ 
+p_{l}\text{ with probability } 1-\mu _{1},
+\end{array}
+\right. 
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{h}&gt;p_{l}.\)</span> Use Bayes’ rule to express the agent’s posterior <span class="math notranslate nohighlight">\(\mu
+_{2}(0)\)</span> at the beginning of period <span class="math notranslate nohighlight">\(2\)</span> after she has received a low
+wage-offer. Show that <span class="math notranslate nohighlight">\(\mu _{2}(0)&lt;\mu _{1}.\)</span> In particular, what is the value of <span class="math notranslate nohighlight">\(\mu_{2}(0)\)</span> when <span class="math notranslate nohighlight">\(p_{h}=1?\)</span></p>
+<ol class="arabic simple" start="8">
+<li><p>We assume that <span class="math notranslate nohighlight">\(p_{h}=1\)</span>. Use Bayes’ rule to compute <span class="math notranslate nohighlight">\(U_{1}^{R}\)</span> and <span class="math notranslate nohighlight">\(U_{1}^{A}\)</span>. Under which condition is it optimal to reject a
+low-wage offer in period 1?</p></li>
+</ol>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>The Bellman equation for an unemployed worker can be written as:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    U = \frac{1}{1+r}(z + p*\text{max}\{U, E(\overline{w})\} + (1-p)*\text{max}\{U, E(\underline{w})\}),
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline{w} = 1\)</span> and <span class="math notranslate nohighlight">\(\underline{w} = 0\)</span>. Reinserting the value function <span class="math notranslate nohighlight">\(E(w) = \frac{w}{r}\)</span> into <span class="math notranslate nohighlight">\(U\)</span>, we find that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    U = \frac{1}{1+r}\left(z + p*\text{max}\left\{U, \frac{\overline{w}}{r}\right\} +(1-p)* \text{max}\left\{U, \frac{\underline{w}}{r}\right\}\right).
+\end{equation*}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>The value of the job search srategy that accepts all job offer is given by:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    U^A = \frac{1}{1+r}\left(z + p\frac{\overline{w}}{r} + (1-p)\frac{\underline{w}}{r}\right) = \frac{p-r}{(1+r)r},\\
+\end{align*}\]</div>
+<p>where the equality follows reinserting <span class="math notranslate nohighlight">\(\overline{w}=1\)</span>, <span class="math notranslate nohighlight">\(\underline{w}=0\)</span>, and <span class="math notranslate nohighlight">\(z=-1\)</span>. Similarly, the value of the job search strategy that rejects low-wage offers is given by:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp; U^R = \frac{1}{1+r}\left(z + p\frac{\overline{w}}{r} + (1-p)U^R\right) \Rightarrow U^R = \frac{p-r}{(p +r)r}.
+\end{align*}\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Since the denominator of <span class="math notranslate nohighlight">\(U^R\)</span> is smaller than the denominator of <span class="math notranslate nohighlight">\(U^A\)</span>, <span class="math notranslate nohighlight">\(U^R\)</span> is greater than <span class="math notranslate nohighlight">\(UÂ\)</span> whenever their numerators are positive, that is when <span class="math notranslate nohighlight">\(p&gt;r\)</span>. Intuitively, the probability of receiving a high-wage offer must be high enough to compensate for the opportunity cost <span class="math notranslate nohighlight">\(r\)</span> of remaining unemployed.</p></li>
+<li><p>In the second period, if the worker rejects the offer, she will stay unemployed forever and receive <span class="math notranslate nohighlight">\(\frac{z}{r}&lt;0=\frac{\underline{w}}{r}\)</span>. Therefore, workers will accept all offers in the second period so that <span class="math notranslate nohighlight">\(U_2 = U^A = \frac{p-r}{(1 +r)r}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(U_1^A\)</span> and <span class="math notranslate nohighlight">\(U_1^R\)</span> can be expressed as:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp;  U_1^A = \frac{p-r}{(1+r)r},\\
+    &amp;  U_1^R = \frac{1}{1+r}\left(z + \frac{p}{r} + (1-p)U_2\right) = U_1^A + \frac{1-p}{1+r}U_2.
+\end{align*}\]</div>
+<ol class="arabic simple" start="6">
+<li><p>For <span class="math notranslate nohighlight">\(U_1^R\)</span> to be greater than <span class="math notranslate nohighlight">\(U_1^A\)</span>, the value of searching in the second and last period <span class="math notranslate nohighlight">\(U_2&gt;0\)</span> must be positive, which holds true whenever <span class="math notranslate nohighlight">\(p&gt;r\)</span>. This is the same condition as in the infinite horizon problem derived in 3.</p></li>
+<li><p>According to Bayes’ rule, <span class="math notranslate nohighlight">\(\mu _{2}(0)\)</span> can be expressed as:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+     \mu _{2}(0) &amp;= Pr(p=p_h| w_1=0)\\
+                 &amp;= \frac{Pr(w_1=0|p_h)Pr(p=p_h)}{Pr(w_1=0|p_h)Pr(p=p_h)+Pr(w_1=0|p_l)Pr(p=p_l)}\\
+                 &amp;= \frac{(1-p_h)\mu_1}{(1-p_h)\mu_1+(1-p_l)(1-\mu_1)}.
+\end{align*}\]</div>
+<p>The condition <span class="math notranslate nohighlight">\(\mu _{2}(0)&lt;\mu _{1}\)</span> is equivalent to <span class="math notranslate nohighlight">\(1/\mu _1&lt;1/\mu _{2}(0)\)</span>. The second condition holds true whenever</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+     \frac{1}{\mu_1} &amp;&lt; \frac{(1-p_h)\mu_1+(1-p_l)(1-\mu_1)}{(1-p_h)\mu_1}\\
+                 \Leftrightarrow 1-p_h &amp;&lt; (1-p_h)\mu_1+(1-p_l)(1-\mu_1)\\
+                 \Leftrightarrow 1-p_h &amp;&lt; 1-p_l,
+\end{align*}\]</div>
+<p>which holds true by definition. As expected, workers put less weight on the optimistic prior <span class="math notranslate nohighlight">\(p=p_h\)</span> after having received a low-wage offer. In particular, when <span class="math notranslate nohighlight">\(p_h=1\)</span>, <span class="math notranslate nohighlight">\(\mu _{2}(0) = 0\)</span> because workers can exclude the belief that they will always receive a high-wage offer.</p>
+<ol class="arabic simple" start="8">
+<li><p>With <span class="math notranslate nohighlight">\(p_h=1\)</span>, <span class="math notranslate nohighlight">\( U_1^A\)</span> and <span class="math notranslate nohighlight">\(U_1^R\)</span> can be expressed as:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp;U_1^A = \frac{1}{1+r}\left(z + \frac{\mu_1}{r} + (1-\mu_1)\frac{p_l}{r}\right),\\
+    &amp;U_1^R = \frac{1}{1+r}\left(z + \frac{\mu_1}{r} + (1-\mu_1)\frac{p_l}{r}+(1-\mu_1)(1-p_l)U_2(0)\right),
+\end{align*}\]</div>
+<p>where, according to the answer to question 4, <span class="math notranslate nohighlight">\(U_2(0) = U^A(0)=\frac{1}{1+r}(z + \frac{\mu_2(0)}{r} + (1-\mu_2(0))\frac{p_l}{r})\)</span>. Since, <span class="math notranslate nohighlight">\(\mu_2(0)=0\)</span> when <span class="math notranslate nohighlight">\(p_h=1\)</span>, we have <span class="math notranslate nohighlight">\(U_2(0)=\frac{p_l-r}{(1+r)r}\)</span>. Therefore, we find that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    U_1^R &gt; U_1^A \Leftrightarrow U_2(0)=\frac{p_l-r}{(1+r)r}&gt;0.
+\end{align*}\]</div>
+<p>The worker find it profitable to reject all low-wage offers in the first period when <span class="math notranslate nohighlight">\(p_l&gt;r\)</span>. This condition is similar to the one in the environment without learning except that now the pessimistic belief has replaced the average one.</p>
+</section>
+</section>
+<section id="multi-armed-bandits">
+<h2>Multi-Armed Bandits<a class="headerlink" href="#multi-armed-bandits" title="Link to this heading">#</a></h2>
+<p><strong>Acknowledgement</strong>: This presentation is borrowed from Tim Miller’s website <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">Mastering Reinforcement Learning</a>.</p>
+<section id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
+<p>A multi-armed bandit is defined by a set of random variables <span class="math notranslate nohighlight">\(X_{i,k}\)</span> where: (i) <span class="math notranslate nohighlight">\(i\in\{1,2,..,N\}\)</span> is the arm of the bandit; (ii) <span class="math notranslate nohighlight">\(k\)</span> is the index of the play.</p>
+<p>Draws are independently distributed and the gambler does not know the probability distributions of the random variables. The gambler plays succesive rounds, observes the reward from the selected arm after each round, and then adjusts her strategy with the objective of maximizing the rewards collected over all rounds.</p>
+</section>
+<section id="q-value">
+<h3>Q-Value<a class="headerlink" href="#q-value" title="Link to this heading">#</a></h3>
+<p>The <strong>Q-value</strong> of an action is defined as the <strong>expected reward</strong> for taking action <span class="math notranslate nohighlight">\(a\)</span>, i.e. <span class="math notranslate nohighlight">\(Q(a) = \mathbb{E}[R | A = a]\)</span>. The true Q-value being unknown, it must be estimated. In practice, one can use the sample average of observed rewards to estimate the Q-value:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+Q(a) = \frac{1}{N(a)} \sum_{i=1}^{t} X_{\{a,i\}},
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t\)</span> is the number of rounds so far, <span class="math notranslate nohighlight">\(N(a)\)</span> is the number of times action <span class="math notranslate nohighlight">\(a\)</span> has been selected in previous rounds, and <span class="math notranslate nohighlight">\(X_{\{a,i\}}\)</span> is the reward obtained in the <span class="math notranslate nohighlight">\(i-th\)</span> round for playing arm <span class="math notranslate nohighlight">\(a\)</span>.</p>
+</section>
+<section id="exploration-exploitation-dilemna">
+<h3>Exploration-Exploitation Dilemna<a class="headerlink" href="#exploration-exploitation-dilemna" title="Link to this heading">#</a></h3>
+<p>After having explored her options for some time, the grambler forms a belief for the Q-value of each arm. Then she can switch to a greedy strategy, selecting only the actions that have given her the best rewards so far. However, being greedy may also lead the gambler to overlook the most profitable arm. Thus, she should follow a strategy that exploit the actions that have been profitable so far, while still exploring other actions. This tension is known as the <strong>exploration vs. exploitation dilemma</strong>.</p>
+</section>
+<section id="implementation">
+<h3>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
+<p>We borrowed the code from Tim Miller’s website <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">Mastering Reinforcement Learning</a>. A smaller repo containing all the programs required for this implementation is available <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">HERE</a>.</p>
+<p>The implementation of the strategy below inherits from the class <code class="docutils literal notranslate"><span class="pre">MultiArmedBandit</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiArmedBandit</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Select an action for this state given from a list given a Q-function &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">qfunction</span><span class="p">):</span>
+        <span class="n">abstract</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Reset a multi-armed bandit to its initial configuration &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulation">
+<h3>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">#</a></h3>
+<p>To demonstrate the effect of a multi-armed bandit strategy, we use the simulation below. The simulation is an implementation of a simple multi-armed bandit problem with five actions and their associated probabilities.</p>
+<p>The simulation runs 2000 episodes of a bandit problem, with each episode being 1000 steps long. At each step, the agent must chose an action. At the beginning of each episode, the bandit strategies are reset. The simulation returns a list of lists, representing the reward received at each step of each episode. The aim for the bandit is to maximise the expected rewards over each episode.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">qtable</span> <span class="kn">import</span> <span class="n">QTable</span>
+
+
+<span class="sd">&quot;&quot;&quot; Run a bandit algorithm for a number of episodes, with each episode</span>
+<span class="sd">being a set length.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">run_bandit</span><span class="p">(</span><span class="n">bandit</span><span class="p">,</span> <span class="n">episodes</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">episode_length</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">drift</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="c1"># The actions available</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+    <span class="c1"># A dummy state</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">rewards</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">episodes</span><span class="p">):</span>
+        <span class="n">bandit</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="c1"># The probability of receiving a payoff of 1 for each action</span>
+        <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+
+        <span class="c1"># The number of times each arm has been selected</span>
+        <span class="n">times_selected</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">qtable</span> <span class="o">=</span> <span class="n">QTable</span><span class="p">()</span>
+
+        <span class="n">episode_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">episode_length</span><span class="p">):</span>
+
+            <span class="c1"># Halfway through the episode, change the probabilities</span>
+            <span class="k">if</span> <span class="n">drift</span> <span class="ow">and</span> <span class="n">step</span> <span class="o">==</span> <span class="n">episode_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+
+            <span class="c1"># Select an action using the bandit</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">bandit</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">qtable</span><span class="p">)</span>
+
+            <span class="c1"># Get the reward for that action</span>
+            <span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">probabilities</span><span class="p">[</span><span class="n">action</span><span class="p">]:</span>
+                <span class="n">reward</span> <span class="o">=</span> <span class="mi">5</span>
+
+            <span class="n">episode_rewards</span> <span class="o">+=</span> <span class="p">[</span><span class="n">reward</span><span class="p">]</span>
+
+            <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">qtable</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                <span class="n">state</span><span class="p">,</span>
+                <span class="n">action</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">reward</span> <span class="o">/</span> <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+                <span class="o">-</span> <span class="p">(</span><span class="n">qtable</span><span class="o">.</span><span class="n">get_q_value</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span> <span class="o">/</span> <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">]),</span>
+            <span class="p">)</span>
+
+        <span class="n">rewards</span> <span class="o">+=</span> <span class="p">[</span><span class="n">episode_rewards</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">rewards</span>
+</pre></div>
+</div>
+</section>
+<section id="epsilon-greedy-strategy">
+<h3><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy<a class="headerlink" href="#epsilon-greedy-strategy" title="Link to this heading">#</a></h3>
+<p>The <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy balances exploration and exploitation by setting the parameter <span class="math notranslate nohighlight">\(\epsilon\)</span> which controls how much the gambler explores. Each time she selects an action, the gambler uses this strategy:</p>
+<ol class="arabic simple">
+<li><p>With probability <span class="math notranslate nohighlight">\(1-\epsilon\)</span>, the gambler <strong>exploits</strong> the armed-bandit by picking the arm with the maximum Q-value (in the case of a tie between several actions, the tie is broken randomly);</p></li>
+<li><p>With probability <span class="math notranslate nohighlight">\(\epsilon\)</span>, the gambler <strong>explores</strong> by picking a random arm, using a uniform probability to select her pick.</p></li>
+</ol>
+<p>The <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy is implemented by the code below, using the <code class="docutils literal notranslate"><span class="pre">random()</span></code> function to pick a random number between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">multi_armed_bandit.multi_armed_bandit</span> <span class="kn">import</span> <span class="n">MultiArmedBandit</span>
+
+
+<span class="k">class</span> <span class="nc">EpsilonGreedy</span><span class="p">(</span><span class="n">MultiArmedBandit</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">qfunction</span><span class="p">):</span>
+        <span class="c1"># Select a random action with epsilon probability</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">arg_max_q</span> <span class="o">=</span> <span class="n">qfunction</span><span class="o">.</span><span class="n">get_argmax_q</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arg_max_q</span>
+</pre></div>
+</div>
+<p>The following plot shows the reward for each step, averaged over 2000 episodes. Each episode is 1000 steps long. We evaluate different values of <span class="math notranslate nohighlight">\(\epsilon\)</span>. The simulations illustrate the exploration-exploitation dilemna: High <span class="math notranslate nohighlight">\(\epsilon\)</span> have a lower reward in the long-run, but low <span class="math notranslate nohighlight">\(\epsilon\)</span> never converge to the opimal reward.</p>
+<p>For our parametric example, choosing <span class="math notranslate nohighlight">\(\epsilon\)</span> between 0.05 and 0.1 is a good strategy. However, there is no universal value for the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter, its optimal value varies across applications.</p>
+<p><img alt="Untitled" src="_images/Armed_Bandits.png" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Optimal_Growth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Growth</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-learning">Bayesian Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-bernouilli">Exercise 4.1 (Bernouilli)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2-normal-normal-conjugacy">Exercise 4.2 (Normal-Normal conjugacy)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-job-search">Exercise 4.3 (Job Search)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-armed-bandits">Multi-Armed Bandits</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value">Q-Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-exploitation-dilemna">Exploration-Exploitation Dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epsilon-greedy-strategy"><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Julien Prat
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
