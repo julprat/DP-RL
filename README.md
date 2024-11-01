@@ -1,3 +1,3 @@
-Teaching Material for DP & RL for Economists
+Teaching Material for Dynamic Programming and Reinforcement Learning for Economists
 
-Autor, Year: Julien Prat, 2024
+Authors, Year: Julien Prat, Boyan Mu 2024
