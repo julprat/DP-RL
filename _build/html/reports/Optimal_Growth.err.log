@@ -15,26 +15,79 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-planning_data = [
-    ('γ', float64),    # Coefficient of relative risk aversion
-    ('β', float64),    # Discount factor
-    ('δ', float64),    # Depreciation rate on capital
-    ('α', float64),    # Return to capital per capita
-    ('A', float64)     # Technology
-]
+@jitclass(planning_data)
+class PlanningProblem():
+
+    def __init__(self, γ=2, β=0.95, δ=0.02, α=0.33, A=1):
+
+        self.γ, self.β = γ, β
+        self.δ, self.α, self.A = δ, α, A
+
+    def u(self, c):
+        '''
+        Utility function
+        ASIDE: If you have a utility function that is hard to solve by hand
+        you can use automatic or symbolic differentiation
+        See https://github.com/HIPS/autograd
+        '''
+        γ = self.γ
+
+        return c ** (1 - γ) / (1 - γ) if γ!= 1 else np.log(c)
+
+    def u_prime(self, c):
+        'Derivative of utility'
+        γ = self.γ
+
+        return c ** (-γ)
+
+    def u_prime_inv(self, c):
+        'Inverse of derivative of utility'
+        γ = self.γ
+
+        return c ** (-1 / γ)
+
+    def f(self, k):
+        'Production function'
+        α, A = self.α, self.A
+
+        return A * k ** α
+
+    def f_prime(self, k):
+        'Derivative of production function'
+        α, A = self.α, self.A
+
+        return α * A * k ** (α - 1)
+
+    def f_prime_inv(self, k):
+        'Inverse of derivative of production function'
+        α, A = self.α, self.A
+
+        return (k / (A * α)) ** (1 / (α - 1))
+
+    def next_k_c(self, k, c):
+        ''''
+        Given the current capital Kt and an arbitrary feasible
+        consumption choice Ct, computes Kt+1 by state transition law
+        and optimal Ct+1 by Euler equation.
+        '''
+        β, δ = self.β, self.δ
+        u_prime, u_prime_inv = self.u_prime, self.u_prime_inv
+        f, f_prime = self.f, self.f_prime
+
+        k_next = f(k) + (1 - δ) * k - c
+        c_next = u_prime_inv(u_prime(c) / (β * (f_prime(k_next) + (1 - δ))))
+
+        return k_next, c_next
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[5], line 2[0m
-[1;32m      1[0m planning_data [38;5;241m=[39m [
-[0;32m----> 2[0m     ([38;5;124m'[39m[38;5;124mγ[39m[38;5;124m'[39m, [43mfloat64[49m),    [38;5;66;03m# Coefficient of relative risk aversion[39;00m
-[1;32m      3[0m     ([38;5;124m'[39m[38;5;124mβ[39m[38;5;124m'[39m, float64),    [38;5;66;03m# Discount factor[39;00m
-[1;32m      4[0m     ([38;5;124m'[39m[38;5;124mδ[39m[38;5;124m'[39m, float64),    [38;5;66;03m# Depreciation rate on capital[39;00m
-[1;32m      5[0m     ([38;5;124m'[39m[38;5;124mα[39m[38;5;124m'[39m, float64),    [38;5;66;03m# Return to capital per capita[39;00m
-[1;32m      6[0m     ([38;5;124m'[39m[38;5;124mA[39m[38;5;124m'[39m, float64)     [38;5;66;03m# Technology[39;00m
-[1;32m      7[0m ]
+Cell [0;32mIn[5], line 1[0m
+[0;32m----> 1[0m [38;5;129m@jitclass[39m(planning_data)
+[1;32m      2[0m [38;5;28;01mclass[39;00m [38;5;21;01mPlanningProblem[39;00m():
+[1;32m      4[0m     [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, γ[38;5;241m=[39m[38;5;241m2[39m, β[38;5;241m=[39m[38;5;241m0.95[39m, δ[38;5;241m=[39m[38;5;241m0.02[39m, α[38;5;241m=[39m[38;5;241m0.33[39m, A[38;5;241m=[39m[38;5;241m1[39m):
+[1;32m      6[0m         [38;5;28mself[39m[38;5;241m.[39mγ, [38;5;28mself[39m[38;5;241m.[39mβ [38;5;241m=[39m γ, β
 
-[0;31mNameError[0m: name 'float64' is not defined
+[0;31mNameError[0m: name 'jitclass' is not defined
 
