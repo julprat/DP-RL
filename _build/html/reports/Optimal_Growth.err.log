@@ -15,116 +15,26 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 18 14:37:30 2018
-@author: Bruno
-"""
-
-#==============================================================================
-# Recursive Methods - Optimal Growth
-#==============================================================================
-
-import os
-import numpy as np
-from scipy.optimize import fminbound
-
-
-def bellman_operator(w, grid, β, u, f, Tw=None, compute_policy=0):
-    # === Apply linear interpolation to w === #
-    w_func = lambda x: np.interp(x, grid, w)
-
-    # == Initialize Tw if necessary == #
-    if Tw is None:
-        Tw = np.empty_like(w)
-
-    if compute_policy:
-        σ = np.empty_like(w)
-
-    # == set Tw[i] = max_c { u(c) + β E w(f(y  - c) z)} == #
-    for i, y in enumerate(grid):
-        def objective(c, y=y):
-            return #Your code goes here
-        c_star = fminbound(objective, 1e-10, y)
-        if compute_policy:
-            #σ[i] = c_star
-            #σ[i] = y - c_star #capital at date t
-            σ[i] = #Your code goes here #y_(t+1) as a function of y_t
-        Tw[i] = #Your code goes here
-
-    if compute_policy:
-        return Tw, σ
-    else:
-        return Tw
-
-
-
-def solve_optgrowth(initial_w, grid, β, u, f, tol=1e-4, max_iter=500):
-
-    w = initial_w  # Set initial condition
-    error = tol + 1
-    i = 0
-
-    # == Create storage array for bellman_operator. Reduces  memory
-    # allocation and speeds code up == #
-    Tw = np.empty(len(grid))
-
-    # Iterate to find solution
-    while error > tol and i < max_iter:
-        w_new = bellman_operator(w,
-                                 grid,
-                                 β,
-                                 u,
-                                 f,
-                                 Tw)
-        error = #Your code goes here 
-        w[:] = w_new
-        i += 1
-        print("Iteration "+str(i)+'\n Error is '+str(error)+'\n') if i % 50 == 0 or error < tol else None
-
-        
-    # Computes policy
-    policy = bellman_operator(w,
-                             grid,
-                             β,
-                             u,
-                             f,
-                             Tw,
-                             compute_policy=1)[1]
- 
-    return [w, policy]
-
-
-
-class CES_OG:
-    """
-    Constant elasticity of substitution optimal growth model so that
-
-        y = f(k) = k^α
-
-
-    The class holds parameters and true value and policy functions.
-    """
-
-    def __init__(self, α=0.4, β=0.96, sigma=0.9):
-
-        self.α, self.β, self.sigma = α, β, sigma 
-
-    def u(self, c):
-        " Utility "
-        return (c**(1-self.sigma)-1)/(1-self.sigma)
-
-    def f(self, k):
-        " Deterministic part of production function.  "
-        return k**self.α
-
-
+planning_data = [
+    ('γ', float64),    # Coefficient of relative risk aversion
+    ('β', float64),    # Discount factor
+    ('δ', float64),    # Depreciation rate on capital
+    ('α', float64),    # Return to capital per capita
+    ('A', float64)     # Technology
+]
 ------------------
 
 
-[0;36m  Cell [0;32mIn[1], line 35[0;36m[0m
-[0;31m    σ[i] = #Your code goes here #y_(t+1) as a function of y_t[0m
-[0m           ^[0m
-[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[5], line 2[0m
+[1;32m      1[0m planning_data [38;5;241m=[39m [
+[0;32m----> 2[0m     ([38;5;124m'[39m[38;5;124mγ[39m[38;5;124m'[39m, [43mfloat64[49m),    [38;5;66;03m# Coefficient of relative risk aversion[39;00m
+[1;32m      3[0m     ([38;5;124m'[39m[38;5;124mβ[39m[38;5;124m'[39m, float64),    [38;5;66;03m# Discount factor[39;00m
+[1;32m      4[0m     ([38;5;124m'[39m[38;5;124mδ[39m[38;5;124m'[39m, float64),    [38;5;66;03m# Depreciation rate on capital[39;00m
+[1;32m      5[0m     ([38;5;124m'[39m[38;5;124mα[39m[38;5;124m'[39m, float64),    [38;5;66;03m# Return to capital per capita[39;00m
+[1;32m      6[0m     ([38;5;124m'[39m[38;5;124mA[39m[38;5;124m'[39m, float64)     [38;5;66;03m# Technology[39;00m
+[1;32m      7[0m ]
 
+[0;31mNameError[0m: name 'float64' is not defined
 
