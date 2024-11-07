@@ -381,9 +381,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-learning">Bayesian Learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-bernouilli">Exercise 4.1 (Bernouilli)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-reservation-wage">Exercise 4.1 (Reservation Wage)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2-normal-normal-conjugacy">Exercise 4.2 (Normal-Normal conjugacy)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-job-search">Exercise 4.3 (Job Search)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-bernouilli">Exercise 4.3 (Bernouilli)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-4-job-search">Exercise 4.4 (Job Search)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-armed-bandits">Multi-Armed Bandits</a><ul class="nav section-nav flex-column">
@@ -410,51 +411,22 @@ document.write(`
 <h1>Learning<a class="headerlink" href="#learning" title="Link to this heading">#</a></h1>
 <section id="bayesian-learning">
 <h2>Bayesian Learning<a class="headerlink" href="#bayesian-learning" title="Link to this heading">#</a></h2>
-<section id="exercise-4-1-bernouilli">
-<h3>Exercise 4.1 (Bernouilli)<a class="headerlink" href="#exercise-4-1-bernouilli" title="Link to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(y\)</span> be a random variable that is drawn from a Bernouilli distribution with probability of success <span class="math notranslate nohighlight">\(p\)</span>.</p>
-<ol class="arabic simple">
-<li><p>Consider a dataset <span class="math notranslate nohighlight">\(Y=(y_1,y_2,...,y_n)\)</span> containing <span class="math notranslate nohighlight">\(n\)</span> realizations of <span class="math notranslate nohighlight">\(y\)</span>. Write down the likelihood of <span class="math notranslate nohighlight">\(Y\)</span> as a function of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
-<li><p>Assume that <span class="math notranslate nohighlight">\(p\)</span> itself is drawn from the following distribution</p></li>
-</ol>
+<section id="exercise-4-1-reservation-wage">
+<h3>Exercise 4.1 (Reservation Wage)<a class="headerlink" href="#exercise-4-1-reservation-wage" title="Link to this heading">#</a></h3>
+<p>Prove that</p>
 <div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-p=\left\{ 
-\begin{array}{l}
-p_{h}\text{ with probability } \mu _{0}, \\ 
-p_{l}\text{ with probability } 1-\mu _{0}.
-\end{array}%
-\right. 
-\end{equation*}\]</div>
-<p>The variable <span class="math notranslate nohighlight">\(\mu_0\)</span> denotes the prior in period <span class="math notranslate nohighlight">\(0\)</span>. Use Bayes rule to express the agent’s posterior <span class="math notranslate nohighlight">\(μ_1(0)\)</span> at the beginning of period <span class="math notranslate nohighlight">\(2\)</span> after having observed a failure in period <span class="math notranslate nohighlight">\(1\)</span>, i.e. <span class="math notranslate nohighlight">\(y_1=0\)</span>. Iterate the computation to derive the posterior after <span class="math notranslate nohighlight">\(n\)</span> failures in a row.</p>
+\[\begin{align*}
+\int_{w_r}^{\infty}(w-w_r)dH(w)=\int_{w_r}^{\infty}[1-H(w)]dw.
+\end{align*}\]</div>
 <details>
 <summary><b>Solution</b></summary>
-<ol class="arabic simple">
-<li><p>The likelihood of <span class="math notranslate nohighlight">\(Y\)</span> reads</p></li>
-</ol>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{equation*}
-    L\left(p | Y \right) = \prod_{i = 1}^{n} p^{y_{i}}(1-p)^{1-y_{i}}.
-\end{equation*}\]</div>
-<ol class="arabic simple" start="2">
-<li><p>By Baye’s rule, we can express <span class="math notranslate nohighlight">\(μ_1(0)\)</span> as:</p></li>
-</ol>
+<p>We start by simplifying the left-hand side. Let <span class="math notranslate nohighlight">\(F(w) = w - w_r\)</span>, the integration by parts formula implies that</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    μ_1(0) = p(p_{h}|y_{1}=0) &amp; = \frac{p(y_{1}=0|p_{h})\mu_{0}}{p(y_{1}=0|p_{h})\mu_{0} + p(y_{1}=0|p_{l})(1-\mu_{0})}\\
-                              &amp; = \frac{(1-p_{h})\mu_{0}}{(1-p_{h})\mu_{0} + (1-p_{l})(1-\mu_{0})}.
+\int_{w_r}^{\infty} (w - w_r) dH(w) &amp;= \int_{w_r}^{\infty} F(w) dH(w)\\ &amp;=\left. F(w) H(w) \right|_{w_r}^{\infty} - \int_{w_r}^{\infty} H(w) dF(w)\\
+&amp;=\left. (w - w_r)H(w) \right|_{w_r}^{\infty} - \int_{w_r}^{\infty} H(w) dw.
 \end{align*}\]</div>
-<p>The posterior after <span class="math notranslate nohighlight">\(n\)</span> failures could be expressed as:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    μ_n(0^n) = p(p_{h}|y_{1}=0, y_{2}=0,...,y_{n}=0) &amp; = \frac{p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{h})\mu_{0}}{p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{h})\mu_{0} + p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{l})(1-\mu_{0})}\\
-                              &amp; = \frac{(1-p_{h})^{n}\mu_{0}}{(1-p_{h})^{n}\mu_{0} + (1-p_{l})^{n}(1-\mu_{0})}.
-\end{align*}\]</div>
-<p>Note that <span class="math notranslate nohighlight">\(μ_n\)</span> can be expressed recursively</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    μ_n(0) = \frac{(1-p_{h})\mu_{n-1}}{(1-p_{h})^{n}\mu_{n-1} + (1-p_{l})^{n}(1-\mu_{n-1})}.
-\end{align*}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\left. (w - w_r)H(w) \right|_{w_r}^{\infty}=\int_{w_r}^{\infty} dw\)</span>, the expression above is indeed equal to <span class="math notranslate nohighlight">\(\int_{w_r}^{\infty} [1-H(w)] dw\)</span>.</p>
 </section>
 <section id="exercise-4-2-normal-normal-conjugacy">
 <h3>Exercise 4.2 (Normal-Normal conjugacy)<a class="headerlink" href="#exercise-4-2-normal-normal-conjugacy" title="Link to this heading">#</a></h3>
@@ -504,8 +476,54 @@ p_{l}\text{ with probability } 1-\mu _{0}.
 \end{align*}\]</div>
 <p>Note that the posterior variance is smaller than the prior variance, reflecting the fact that, after observing the data, we have more precise information about <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 </section>
-<section id="exercise-4-3-job-search">
-<h3>Exercise 4.3 (Job Search)<a class="headerlink" href="#exercise-4-3-job-search" title="Link to this heading">#</a></h3>
+<section id="exercise-4-3-bernouilli">
+<h3>Exercise 4.3 (Bernouilli)<a class="headerlink" href="#exercise-4-3-bernouilli" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(y\)</span> be a random variable that is drawn from a Bernouilli distribution with probability of success <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Consider a dataset <span class="math notranslate nohighlight">\(Y=(y_1,y_2,...,y_n)\)</span> containing <span class="math notranslate nohighlight">\(n\)</span> realizations of <span class="math notranslate nohighlight">\(y\)</span>. Write down the likelihood of <span class="math notranslate nohighlight">\(Y\)</span> as a function of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(p\)</span> itself is drawn from the following distribution</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+p=\left\{ 
+\begin{array}{l}
+p_{h}\text{ with probability } \mu _{0}, \\ 
+p_{l}\text{ with probability } 1-\mu _{0}.
+\end{array}%
+\right. 
+\end{equation*}\]</div>
+<p>The variable <span class="math notranslate nohighlight">\(\mu_0\)</span> denotes the prior in period <span class="math notranslate nohighlight">\(0\)</span>. Use Bayes rule to express the agent’s posterior <span class="math notranslate nohighlight">\(μ_1(0)\)</span> at the beginning of period <span class="math notranslate nohighlight">\(2\)</span> after having observed a failure in period <span class="math notranslate nohighlight">\(1\)</span>, i.e. <span class="math notranslate nohighlight">\(y_1=0\)</span>. Iterate the computation to derive the posterior after <span class="math notranslate nohighlight">\(n\)</span> failures in a row.</p>
+<details>
+<summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>The likelihood of <span class="math notranslate nohighlight">\(Y\)</span> reads</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    L\left(p | Y \right) = \prod_{i = 1}^{n} p^{y_{i}}(1-p)^{1-y_{i}}.
+\end{equation*}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>By Baye’s rule, we can express <span class="math notranslate nohighlight">\(μ_1(0)\)</span> as:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    μ_1(0) = p(p_{h}|y_{1}=0) &amp; = \frac{p(y_{1}=0|p_{h})\mu_{0}}{p(y_{1}=0|p_{h})\mu_{0} + p(y_{1}=0|p_{l})(1-\mu_{0})}\\
+                              &amp; = \frac{(1-p_{h})\mu_{0}}{(1-p_{h})\mu_{0} + (1-p_{l})(1-\mu_{0})}.
+\end{align*}\]</div>
+<p>The posterior after <span class="math notranslate nohighlight">\(n\)</span> failures could be expressed as:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    μ_n(0^n) = p(p_{h}|y_{1}=0, y_{2}=0,...,y_{n}=0) &amp; = \frac{p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{h})\mu_{0}}{p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{h})\mu_{0} + p(y_{1}=0, y_{2}=0,...,y_{n}=0|p_{l})(1-\mu_{0})}\\
+                              &amp; = \frac{(1-p_{h})^{n}\mu_{0}}{(1-p_{h})^{n}\mu_{0} + (1-p_{l})^{n}(1-\mu_{0})}.
+\end{align*}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(μ_n\)</span> can be expressed recursively</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    μ_n(0) = \frac{(1-p_{h})\mu_{n-1}}{(1-p_{h})^{n}\mu_{n-1} + (1-p_{l})^{n}(1-\mu_{n-1})}.
+\end{align*}\]</div>
+</section>
+<section id="exercise-4-4-job-search">
+<h3>Exercise 4.4 (Job Search)<a class="headerlink" href="#exercise-4-4-job-search" title="Link to this heading">#</a></h3>
 <p>We consider a labor market where workers are either employed or searching
 for a job. Time is discrete and agents discount the future at rate <span class="math notranslate nohighlight">\(r\)</span>, so
 that their discount factor <span class="math notranslate nohighlight">\(\beta =1/(1+r).\)</span> When a firm meets a job seeker,
@@ -837,9 +855,10 @@ Q(a) = \frac{1}{N(a)} \sum_{i=1}^{t} X_{\{a,i\}},
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-learning">Bayesian Learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-bernouilli">Exercise 4.1 (Bernouilli)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1-reservation-wage">Exercise 4.1 (Reservation Wage)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2-normal-normal-conjugacy">Exercise 4.2 (Normal-Normal conjugacy)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-job-search">Exercise 4.3 (Job Search)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-bernouilli">Exercise 4.3 (Bernouilli)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-4-job-search">Exercise 4.4 (Job Search)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-armed-bandits">Multi-Armed Bandits</a><ul class="nav section-nav flex-column">
