@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Learning';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reinforcement Learning" href="Reinforcement_Learning.html" />
     <link rel="prev" title="Growth" href="Optimal_Growth.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bellman_Equation.html">Bellman Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Growth</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reinforcement_Learning.html">Reinforcement Learning</a></li>
 </ul>
 
     </div>
@@ -385,15 +387,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2-normal-normal-conjugacy">Exercise 4.2 (Normal-Normal conjugacy)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-bernouilli">Exercise 4.3 (Bernouilli)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-4-job-search">Exercise 4.4 (Job Search)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-armed-bandits">Multi-Armed Bandits</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value">Q-Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-exploitation-dilemna">Exploration-Exploitation Dilemna</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epsilon-greedy-strategy"><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy</a></li>
 </ul>
 </li>
 </ul>
@@ -657,146 +650,6 @@ low-wage offer in period 1?</p></li>
 <p>The worker find it profitable to reject all low-wage offers in the first period when <span class="math notranslate nohighlight">\(p_l&gt;r\)</span>. This condition is similar to the one in the environment without learning except that now the pessimistic belief has replaced the average one.</p>
 </section>
 </section>
-<section id="multi-armed-bandits">
-<h2>Multi-Armed Bandits<a class="headerlink" href="#multi-armed-bandits" title="Link to this heading">#</a></h2>
-<p><strong>Acknowledgement</strong>: This presentation is borrowed from Tim Miller’s website <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">Mastering Reinforcement Learning</a>.</p>
-<section id="definition">
-<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
-<p>A multi-armed bandit is defined by a set of random variables <span class="math notranslate nohighlight">\(X_{i,k}\)</span> where: (i) <span class="math notranslate nohighlight">\(i\in\{1,2,..,N\}\)</span> is the arm of the bandit; (ii) <span class="math notranslate nohighlight">\(k\)</span> is the index of the play.</p>
-<p>Draws are independently distributed and the gambler does not know the probability distributions of the random variables. The gambler plays succesive rounds, observes the reward from the selected arm after each round, and then adjusts her strategy with the objective of maximizing the rewards collected over all rounds.</p>
-</section>
-<section id="q-value">
-<h3>Q-Value<a class="headerlink" href="#q-value" title="Link to this heading">#</a></h3>
-<p>The <strong>Q-value</strong> of an action is defined as the <strong>expected reward</strong> for taking action <span class="math notranslate nohighlight">\(a\)</span>, i.e. <span class="math notranslate nohighlight">\(Q(a) = \mathbb{E}[R | A = a]\)</span>. The true Q-value being unknown, it must be estimated. In practice, one can use the sample average of observed rewards to estimate the Q-value:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-Q(a) = \frac{1}{N(a)} \sum_{i=1}^{t} X_{\{a,i\}},
-\end{align*}\]</div>
-<p>where <span class="math notranslate nohighlight">\(t\)</span> is the number of rounds so far, <span class="math notranslate nohighlight">\(N(a)\)</span> is the number of times action <span class="math notranslate nohighlight">\(a\)</span> has been selected in previous rounds, and <span class="math notranslate nohighlight">\(X_{\{a,i\}}\)</span> is the reward obtained in the <span class="math notranslate nohighlight">\(i-th\)</span> round for playing arm <span class="math notranslate nohighlight">\(a\)</span>.</p>
-</section>
-<section id="exploration-exploitation-dilemna">
-<h3>Exploration-Exploitation Dilemna<a class="headerlink" href="#exploration-exploitation-dilemna" title="Link to this heading">#</a></h3>
-<p>After having explored her options for some time, the grambler forms a belief for the Q-value of each arm. Then she can switch to a greedy strategy, selecting only the actions that have given her the best rewards so far. However, being greedy may also lead the gambler to overlook the most profitable arm. Thus, she should follow a strategy that exploit the actions that have been profitable so far, while still exploring other actions. This tension is known as the <strong>exploration vs. exploitation dilemma</strong>.</p>
-</section>
-<section id="implementation">
-<h3>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
-<p>We borrowed the code from Tim Miller’s website <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">Mastering Reinforcement Learning</a>. A smaller repo containing all the programs required for this implementation is available <a class="reference external" href="https://github.com/julprat/Armed_Bandits">HERE</a>.</p>
-<p>The implementation of the strategy below inherits from the class <code class="docutils literal notranslate"><span class="pre">MultiArmedBandit</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiArmedBandit</span><span class="p">():</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Select an action for this state given from a list given a Q-function &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">qfunction</span><span class="p">):</span>
-        <span class="n">abstract</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Reset a multi-armed bandit to its initial configuration &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="simulation">
-<h3>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">#</a></h3>
-<p>To demonstrate the effect of a multi-armed bandit strategy, we use the simulation below. The simulation is an implementation of a simple multi-armed bandit problem with five actions and their associated probabilities.</p>
-<p>The simulation runs 2000 episodes of a bandit problem, with each episode being 1000 steps long. At each step, the agent must chose an action. At the beginning of each episode, the bandit strategies are reset. The simulation returns a list of lists, representing the reward received at each step of each episode. The aim for the bandit is to maximise the expected rewards over each episode.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">qtable</span> <span class="kn">import</span> <span class="n">QTable</span>
-
-
-<span class="sd">&quot;&quot;&quot; Run a bandit algorithm for a number of episodes, with each episode</span>
-<span class="sd">being a set length.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="k">def</span> <span class="nf">run_bandit</span><span class="p">(</span><span class="n">bandit</span><span class="p">,</span> <span class="n">episodes</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">episode_length</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">drift</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-
-    <span class="c1"># The actions available</span>
-    <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-
-    <span class="c1"># A dummy state</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="n">rewards</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">episodes</span><span class="p">):</span>
-        <span class="n">bandit</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-
-        <span class="c1"># The probability of receiving a payoff of 1 for each action</span>
-        <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
-
-        <span class="c1"># The number of times each arm has been selected</span>
-        <span class="n">times_selected</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">qtable</span> <span class="o">=</span> <span class="n">QTable</span><span class="p">()</span>
-
-        <span class="n">episode_rewards</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">episode_length</span><span class="p">):</span>
-
-            <span class="c1"># Halfway through the episode, change the probabilities</span>
-            <span class="k">if</span> <span class="n">drift</span> <span class="ow">and</span> <span class="n">step</span> <span class="o">==</span> <span class="n">episode_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
-
-            <span class="c1"># Select an action using the bandit</span>
-            <span class="n">action</span> <span class="o">=</span> <span class="n">bandit</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">qtable</span><span class="p">)</span>
-
-            <span class="c1"># Get the reward for that action</span>
-            <span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">probabilities</span><span class="p">[</span><span class="n">action</span><span class="p">]:</span>
-                <span class="n">reward</span> <span class="o">=</span> <span class="mi">5</span>
-
-            <span class="n">episode_rewards</span> <span class="o">+=</span> <span class="p">[</span><span class="n">reward</span><span class="p">]</span>
-
-            <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">qtable</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-                <span class="n">state</span><span class="p">,</span>
-                <span class="n">action</span><span class="p">,</span>
-                <span class="p">(</span><span class="n">reward</span> <span class="o">/</span> <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
-                <span class="o">-</span> <span class="p">(</span><span class="n">qtable</span><span class="o">.</span><span class="n">get_q_value</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span> <span class="o">/</span> <span class="n">times_selected</span><span class="p">[</span><span class="n">action</span><span class="p">]),</span>
-            <span class="p">)</span>
-
-        <span class="n">rewards</span> <span class="o">+=</span> <span class="p">[</span><span class="n">episode_rewards</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">rewards</span>
-</pre></div>
-</div>
-</section>
-<section id="epsilon-greedy-strategy">
-<h3><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy<a class="headerlink" href="#epsilon-greedy-strategy" title="Link to this heading">#</a></h3>
-<p>The <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy balances exploration and exploitation by setting the parameter <span class="math notranslate nohighlight">\(\epsilon\)</span> which controls how much the gambler explores. Each time she selects an action, the gambler uses this strategy:</p>
-<ol class="arabic simple">
-<li><p>With probability <span class="math notranslate nohighlight">\(1-\epsilon\)</span>, the gambler <strong>exploits</strong> the armed-bandit by picking the arm with the maximum Q-value (in the case of a tie between several actions, the tie is broken randomly);</p></li>
-<li><p>With probability <span class="math notranslate nohighlight">\(\epsilon\)</span>, the gambler <strong>explores</strong> by picking a random arm, using a uniform probability to select her pick.</p></li>
-</ol>
-<p>The <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy is implemented by the code below, using the <code class="docutils literal notranslate"><span class="pre">random()</span></code> function to pick a random number between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">multi_armed_bandit.multi_armed_bandit</span> <span class="kn">import</span> <span class="n">MultiArmedBandit</span>
-
-
-<span class="k">class</span> <span class="nc">EpsilonGreedy</span><span class="p">(</span><span class="n">MultiArmedBandit</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
-
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">qfunction</span><span class="p">):</span>
-        <span class="c1"># Select a random action with epsilon probability</span>
-        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="n">arg_max_q</span> <span class="o">=</span> <span class="n">qfunction</span><span class="o">.</span><span class="n">get_argmax_q</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">arg_max_q</span>
-</pre></div>
-</div>
-<p>The following plot shows the reward for each step, averaged over 2000 episodes. Each episode is 1000 steps long. We evaluate different values of <span class="math notranslate nohighlight">\(\epsilon\)</span>. The simulations illustrate the exploration-exploitation dilemna: High <span class="math notranslate nohighlight">\(\epsilon\)</span> have a lower reward in the long-run, but low <span class="math notranslate nohighlight">\(\epsilon\)</span> never converge to the opimal reward.</p>
-<p>For our parametric example, choosing <span class="math notranslate nohighlight">\(\epsilon\)</span> between 0.05 and 0.1 is a good strategy. However, there is no universal value for the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter, its optimal value varies across applications.</p>
-<p><img alt="Untitled" src="_images/Armed_Bandits.png" /></p>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -838,6 +691,15 @@ Q(a) = \frac{1}{N(a)} \sum_{i=1}^{t} X_{\{a,i\}},
         <p class="prev-next-title">Growth</p>
       </div>
     </a>
+    <a class="right-next"
+       href="Reinforcement_Learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reinforcement Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -859,15 +721,6 @@ Q(a) = \frac{1}{N(a)} \sum_{i=1}^{t} X_{\{a,i\}},
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2-normal-normal-conjugacy">Exercise 4.2 (Normal-Normal conjugacy)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-3-bernouilli">Exercise 4.3 (Bernouilli)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-4-job-search">Exercise 4.4 (Job Search)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-armed-bandits">Multi-Armed Bandits</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value">Q-Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-exploitation-dilemna">Exploration-Exploitation Dilemna</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epsilon-greedy-strategy"><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy strategy</a></li>
 </ul>
 </li>
 </ul>
