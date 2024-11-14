@@ -8,3 +8,4 @@ chapters:
 - file: Bellman_Equation
 - file: Optimal_Growth
 - file: Learning
+- file: Reinforcement_Learning
