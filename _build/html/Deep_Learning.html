@@ -402,6 +402,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deep-learning">
 <h1>Deep Learning<a class="headerlink" href="#deep-learning" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/julprat/DP_RL/blob/main/Deep_Learning.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <section id="approximation-of-growth-model">
 <h2>Approximation of Growth Model<a class="headerlink" href="#approximation-of-growth-model" title="Link to this heading">#</a></h2>
 <p><strong>Acknowledgement</strong>: This notebook has been written by <strong><a class="reference external" href="https://sites.google.com/site/mahdiebrahimikahou/about-me">Mahdi E Kahou</a></strong>.</p>
@@ -431,7 +432,7 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(u(c) = \frac{c^{1-\sigma}}{1-\sigma}\)</span>, and <span class="math notranslate nohighlight">\(f(k) = k^\alpha\)</span>,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\sigma = 1\)</span>, <span class="math notranslate nohighlight">\(\beta = 0.9\)</span>, <span class="math notranslate nohighlight">\(\alpha = \frac{1}{3}\)</span>.</p></li>
 </ol>
-<p>Load packages</p>
+<p><strong>Load packages</strong></p>
 <p>Installation instructions for the <a class="reference external" href="https://www.d2l.ai/chapter_installation/index.html">d2l package</a> and the <a class="reference external" href="https://pytorch.org/multipy/main/setup.html">PyTorch package</a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -445,7 +446,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">d2l</span> <span class="kn">import</span> <span class="n">torch</span> <span class="k">as</span> <span class="n">d2l</span>
 </pre></div>
 </div>
-<p>Define plotting setups</p>
+<p><strong>Define plotting setups</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">fontsize</span><span class="o">=</span> <span class="mi">14</span>
 <span class="n">ticksize</span> <span class="o">=</span> <span class="mi">14</span>
@@ -463,7 +464,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Setting up the model’s parameters</p>
+<p><strong>Setting up the model’s parameters</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">class</span> <span class="nc">Params</span><span class="p">(</span><span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -475,7 +476,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">save_hyperparameters</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Define some useful functions:</p>
+<p><strong>Define some useful functions:</strong></p>
 <p><span class="math notranslate nohighlight">\(f(k)\)</span>: Production function</p>
 <p><span class="math notranslate nohighlight">\(f'(k)\)</span>: derivative of the production function</p>
 <p><span class="math notranslate nohighlight">\(SS\)</span>: Steady states of the capital and consumption</p>
