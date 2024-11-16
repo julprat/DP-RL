@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Reinforcement_Learning';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deep Learning" href="Deep_Learning.html" />
     <link rel="prev" title="Learning" href="Learning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -186,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Growth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Learning.html">Learning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Deep_Learning.html">Deep Learning</a></li>
 </ul>
 
     </div>
@@ -395,6 +397,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-iteration">Policy Iteration</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Reinforcement Learning</a></li>
 </ul>
             </nav>
         </div>
@@ -431,7 +434,7 @@ Q(a) = \frac{1}{N(a)} \sum_{i=1}^{t} X_{\{a,i\}},
 </section>
 <section id="implementation">
 <h3>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
-<p>We borrowed the code from Tim Miller’s website <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">Mastering Reinforcement Learning</a>. A smaller repo containing all the programs required for this implementation is available <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">HERE</a>.</p>
+<p>We borrowed the code from Tim Miller’s website <a class="reference external" href="https://gibberblot.github.io/rl-notes/single-agent/multi-armed-bandits.html">Mastering Reinforcement Learning</a>. A smaller repo containing all the programs required for this implementation is available <a class="reference external" href="https://github.com/julprat/Armed_Bandits">HERE</a>.</p>
 <p>The implementation of the strategy below inherits from the class <code class="docutils literal notranslate"><span class="pre">MultiArmedBandit</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -875,6 +878,15 @@ Iteration 4
 <p>The figure above shows the value functions at each iteration. Note that the total number of iterations is significantly smaller than in the nested procedure, where the value and policy functions are updated simultaneously.</p>
 </section>
 </section>
+<section id="id1">
+<h2>Reinforcement Learning<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/AntonioSerrano/Implementation-of-RL-algorithms-from-Sutton-and-Barto-2018">This repository</a> provides code, exercises and solutions from</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://incompleteideas.net/book/RLbook2018.pdf">Reinforcement Learning: An Introduction (2nd Edition)</a></p></li>
+</ul>
+<p>Each folder in <a class="reference external" href="https://github.com/AntonioSerrano/Implementation-of-RL-algorithms-from-Sutton-and-Barto-2018">the repository</a> corresponds to one or more chapters of the above textbook and/or course. In addition to exercises and solution, each folder also contains a list of learning goals, a brief concept summary, and links to the relevant readings.</p>
+<p>All code is written in Python 3 and uses RL environments from <a class="reference external" href="https://gym.openai.com/">OpenAI Gym</a>. Advanced techniques use <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> for neural network implementations.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -916,6 +928,15 @@ Iteration 4
         <p class="prev-next-title">Learning</p>
       </div>
     </a>
+    <a class="right-next"
+       href="Deep_Learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deep Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -946,6 +967,7 @@ Iteration 4
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-iteration">Policy Iteration</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Reinforcement Learning</a></li>
 </ul>
   </nav></div>
 

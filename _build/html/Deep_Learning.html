@@ -442,9 +442,8 @@ document.write(`
 <section id="load-packages">
 <h3>Load packages<a class="headerlink" href="#load-packages" title="Link to this heading">#</a></h3>
 <p>Installation instructions for the <a class="reference external" href="https://www.d2l.ai/chapter_installation/index.html">d2l package</a> and the <a class="reference external" href="https://pytorch.org/multipy/main/setup.html">PyTorch package</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
@@ -454,21 +453,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">torchsummary</span>
 <span class="kn">from</span> <span class="nn">d2l</span> <span class="kn">import</span> <span class="n">torch</span> <span class="k">as</span> <span class="n">d2l</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="define-plotting-setups">
@@ -489,6 +473,23 @@ document.write(`
     <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="n">ticksize</span>
 <span class="p">}</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;font.family&#39;</span><span class="p">:</span><span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span><span class="n">figsize</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s1">&#39;figure.dpi&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="n">ticksize</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">}</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -576,22 +577,18 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">Grid_data</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">Grid_data</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span>
 <span class="n">train_labeled</span> <span class="o">=</span> <span class="n">Data_label</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
 <span class="n">train</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">train_labeled</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="defining-the-approximating-function-neural-networks">
 <h3>Defining the approximating function (neural networks):<a class="headerlink" href="#defining-the-approximating-function-neural-networks" title="Link to this heading">#</a></h3>
 <p>Here the the approximation function (deep neural net) is <span class="math notranslate nohighlight">\(\hat{q}=[\hat{c},\hat{k}] : \mathbb{R} → \mathbb{R}^2\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">NN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">dim_hidden</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
                 <span class="n">layers</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
@@ -618,8 +615,6 @@ document.write(`
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># first element is consumption, the second element is capital</span>
         <span class="k">return</span>  <span class="n">out</span>
 </pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -691,75 +686,21 @@ document.write(`
 </div>
 <section id="initializing-the-neural-net-and-defining-the-optimizer">
 <h4>Initializing the neural net and defining the optimizer<a class="headerlink" href="#initializing-the-neural-net-and-defining-the-optimizer" title="Link to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q_hat</span><span class="o">=</span> <span class="n">NN</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">q_hat</span><span class="o">=</span> <span class="n">NN</span><span class="p">()</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">q_hat</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
 <span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">q_hat</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q_hat</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NN(
-  (q): Sequential(
-    (0): Linear(in_features=1, out_features=128, bias=True)
-    (1): Tanh()
-    (2): Linear(in_features=128, out_features=128, bias=True)
-    (3): Tanh()
-    (4): Linear(in_features=128, out_features=128, bias=True)
-    (5): Tanh()
-    (6): Linear(in_features=128, out_features=128, bias=True)
-    (7): Tanh()
-    (8): Linear(in_features=128, out_features=2, bias=True)
-    (9): Softplus(beta=1.0, threshold=20.0)
-  )
-)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Torchsummary provides a more readable summary of the neural network</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Torchsummary provides a more readable summary of the neural network</span>
 <span class="n">torchsummary</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">q_hat</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------
-        Layer (type)               Output Shape         Param #
-================================================================
-            Linear-1                  [-1, 128]             256
-              Tanh-2                  [-1, 128]               0
-            Linear-3                  [-1, 128]          16,512
-              Tanh-4                  [-1, 128]               0
-            Linear-5                  [-1, 128]          16,512
-              Tanh-6                  [-1, 128]               0
-            Linear-7                  [-1, 128]          16,512
-              Tanh-8                  [-1, 128]               0
-            Linear-9                    [-1, 2]             258
-         Softplus-10                    [-1, 2]               0
-================================================================
-Total params: 50,050
-Trainable params: 50,050
-Non-trainable params: 0
-----------------------------------------------------------------
-Input size (MB): 0.00
-Forward/backward pass size (MB): 0.01
-Params size (MB): 0.19
-Estimated Total Size (MB): 0.20
-----------------------------------------------------------------
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 </section>
@@ -776,9 +717,8 @@ Estimated Total Size (MB): 0.20
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
         <span class="n">time_zero</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">time_next</span> <span class="o">=</span> <span class="n">time</span><span class="o">+</span><span class="mi">1</span>
@@ -812,40 +752,17 @@ Estimated Total Size (MB): 0.20
                <span class="p">,</span> <span class="s1">&#39;,&#39;</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:.2e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loss_3</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:.2e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">get_lr</span><span class="p">(</span><span class="n">optimizer</span><span class="p">))</span> <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch , loss , loss_bc , loss_euler , loss_initial , lr_rate
-0 , 3.09e-03 , 1.26e-03 , 3.14e-03 , 4.55e-03 , 1.00e-03
-100 , 1.02e-07 , 4.97e-07 , 6.55e-08 , 1.11e-09 , 8.00e-04
-200 , 5.65e-08 , 5.74e-08 , 6.30e-08 , 3.58e-09 , 6.40e-04
-300 , 1.86e-08 , 9.00e-08 , 1.20e-08 , 2.40e-12 , 5.12e-04
-400 , 2.56e-08 , 1.65e-07 , 1.12e-08 , 2.83e-10 , 4.10e-04
-500 , 1.68e-08 , 1.05e-07 , 7.78e-09 , 5.97e-10 , 3.28e-04
-600 , 2.60e-08 , 2.32e-07 , 3.42e-09 , 3.82e-10 , 2.62e-04
-700 , 9.06e-09 , 4.52e-08 , 5.63e-09 , 3.92e-10 , 2.10e-04
-800 , 1.29e-08 , 1.08e-07 , 2.55e-09 , 3.11e-10 , 1.68e-04
-900 , 6.66e-09 , 1.89e-08 , 5.94e-09 , 6.28e-11 , 1.34e-04
-1000 , 7.68e-09 , 5.49e-08 , 2.72e-09 , 7.57e-11 , 1.07e-04
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="plotting-the-results">
 <h3>Plotting the results<a class="headerlink" href="#plotting-the-results" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_test</span> <span class="o">=</span> <span class="n">Grid_data</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">time_test</span> <span class="o">=</span> <span class="n">Grid_data</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span>
 <span class="n">c_hat_path</span> <span class="o">=</span> <span class="n">q_hat</span><span class="p">(</span><span class="n">time_test</span><span class="p">)[:,[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
 <span class="n">k_hat_path</span> <span class="o">=</span> <span class="n">q_hat</span><span class="p">(</span><span class="n">time_test</span><span class="p">)[:,[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_test</span><span class="p">,</span><span class="n">k_hat_path</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>  <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Approximate capital path&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">SS</span><span class="p">()</span><span class="o">.</span><span class="n">k_ss</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;k Steady State&quot;</span><span class="p">)</span>
@@ -864,15 +781,6 @@ Estimated Total Size (MB): 0.20
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d8/rg4nc_vs73l0c196ylpc1cyh0000gn/T/ipykernel_19759/1952787435.py:18: UserWarning: The figure layout has changed to tight
-  plt.tight_layout()
-</pre></div>
-</div>
-<img alt="_images/45c4558c6ea119ffaa164b4b79711a85db85b7fc322aa22b20a2beadfb9b7385.png" src="_images/45c4558c6ea119ffaa164b4b79711a85db85b7fc322aa22b20a2beadfb9b7385.png" />
-</div>
 </div>
 </section>
 </section>
