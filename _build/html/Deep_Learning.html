@@ -382,6 +382,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">PyTorch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-of-growth-model">Approximation of Growth Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-grid-and-data-loader">Preparing grid and data loader</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-structure-of-neural-network">Defining structure of neural network</a></li>
@@ -402,10 +403,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deep-learning">
 <h1>Deep Learning<a class="headerlink" href="#deep-learning" title="Link to this heading">#</a></h1>
+<section id="pytorch">
+<h2>PyTorch<a class="headerlink" href="#pytorch" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://pytorch.org/">PyTorch</a> is an open source machine learning and deep learning framework for Python. In particular, Pytorch streamlines the parametrizarion and optimization of neural networks.</p>
+<p><a class="reference external" href="https://www.learnpytorch.io/">This website</a> offers accessible ressources for learning how to use Pytorch to implement deep learning algorithms.</p>
+<p>The figure below illustrates the typical Pytorch workflow, from data selction to model training.</p>
+<p><img alt="Untitled" src="_images/PyTorch_Workflow.png" /></p>
+<p>The first step consists in <a class="reference external" href="https://www.learnpytorch.io/01_pytorch_workflow/#split-data-into-training-and-test-sets">splitting your data into a training and a testing set</a>.</p>
+<p>Then you have to build your model.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> contains different classess that let you build and train the layers of your neural network. All models in PyTorch inherit from the subclass nn.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">torch.optim</span></code> contains various optimization algorithms, allowing you to select the most efficient implementation of gradient descent for your problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.Parameter</span></code> contains the parameters of your neural network, like weights and biases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward()</span></code> tells the larger blocks of your network how to make calculations on inputs.</p></li>
+</ul>
+<p>In order to train your model, you have to define the <strong>loss function</strong> that you wish to minmize. In practice, the loss will measures how far the predictions of your model are from the actual value stored in your testing set.</p>
+<p>PyTorch training loop goes through the following 5 steps.</p>
+<p><img alt="Untitled" src="_images/Steps_PyTorch.png" /></p>
+</section>
 <section id="approximation-of-growth-model">
 <h2>Approximation of Growth Model<a class="headerlink" href="#approximation-of-growth-model" title="Link to this heading">#</a></h2>
 <p><strong>Acknowledgement</strong>: This notebook has been written by <strong><a class="reference external" href="https://sites.google.com/site/mahdiebrahimikahou/about-me">Mahdi E Kahou</a></strong>.</p>
-<p>Consider the canonical growth problem:</p>
+<p>We now illustrate how deep learning can be applied to solve the solution of the canonical growth problem.</p>
 <p><span class="math notranslate nohighlight">\(\begin{align}
 \quad &amp; \max_{\{c_t\}_{t=0}^\infty } \sum \beta^t u(c_t)\\
 \quad &amp; \text{s.t.}\quad  k_{t+1} = f(k_t) + (1-\delta) k_t -c_t,\\
@@ -775,6 +794,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">PyTorch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-of-growth-model">Approximation of Growth Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-grid-and-data-loader">Preparing grid and data loader</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-structure-of-neural-network">Defining structure of neural network</a></li>
