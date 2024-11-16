@@ -477,9 +477,8 @@ document.write(`
 </section>
 <section id="setting-up-the-model-s-parameters">
 <h3>Setting up the model’s parameters<a class="headerlink" href="#setting-up-the-model-s-parameters" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Params</span><span class="p">(</span><span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">Params</span><span class="p">(</span><span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">,</span>
                  <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
@@ -489,34 +488,14 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">save_hyperparameters</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">class</span> <span class="nc">Params</span><span class="p">(</span><span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                  <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                  <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                  <span class="n">k_0</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>                 <span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="bp">self</span><span class="o">.</span><span class="n">save_hyperparameters</span><span class="p">()</span>
-
-<span class="ne">NameError</span>: name &#39;d2l&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="define-some-useful-functions">
 <h3>Define some useful functions:<a class="headerlink" href="#define-some-useful-functions" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(f(k)\)</span>: Production function</p>
 <p><span class="math notranslate nohighlight">\(f'(k)\)</span>: derivative of the production function</p>
 <p><span class="math notranslate nohighlight">\(SS\)</span>: Steady states of the capital and consumption</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="n">Params</span><span class="p">()</span><span class="o">.</span><span class="n">alpha</span>
     <span class="k">return</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span>
 
@@ -539,14 +518,11 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">c_ss</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k_ss</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">k_ss</span>
 </pre></div>
 </div>
-</div>
-</div>
 </section>
 <section id="preparing-the-grid-and-the-data-loader-for-stochastic-gradient-method">
 <h3>Preparing the grid and the data loader (for stochastic gradient method)<a class="headerlink" href="#preparing-the-grid-and-the-data-loader-for-stochastic-gradient-method" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Grid_data</span><span class="p">(</span><span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">Grid_data</span><span class="p">(</span><span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">max_T</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
                  <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
@@ -555,11 +531,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_range</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Data_label</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">Data_label</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">data</span>
@@ -571,8 +544,6 @@ document.write(`
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span>
 </pre></div>
-</div>
-</div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">train_data</span> <span class="o">=</span> <span class="n">Grid_data</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span>
@@ -613,9 +584,8 @@ document.write(`
         <span class="k">return</span>  <span class="n">out</span>
 </pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternative Neural Network with ReLU activation functions</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Alternative Neural Network with ReLU activation functions</span>
 <span class="sd">&quot;&quot;&quot; class NN(nn.Module, d2l.HyperParameters):</span>
 <span class="sd">    def __init__(self,</span>
 <span class="sd">                 dim_hidden = 128,</span>
@@ -644,29 +614,18 @@ document.write(`
 <span class="sd">        return  out &quot;&quot;&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; class NN(nn.Module, d2l.HyperParameters):\n    def __init__(self,\n                 dim_hidden = 128,\n                layers = 4,\n                hidden_bias = True):\n        super().__init__()\n        self.save_hyperparameters()\n\n        torch.manual_seed(123)\n        module = []\n        module.append(nn.Linear(1,self.dim_hidden, bias = self.hidden_bias))\n        module.append(nn.ReLU())\n\n        for i in range(self.layers-1):\n            module.append(nn.Linear(self.dim_hidden,self.dim_hidden, bias = self.hidden_bias))\n            module.append(nn.ReLU())\n\n        module.append(nn.Linear(self.dim_hidden,2))\n        module.append(nn.Softplus(beta = 1.0)) #The softplus layer ensures c&gt;0,k&gt;0\n\n        self.q = nn.Sequential(*module)\n\n\n    def forward(self, x):\n        out = self.q(x) # first element is consumption, the second element is capital\n        return  out &#39;
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="optimization-learning-process">
 <h3>Optimization (Learning) process<a class="headerlink" href="#optimization-learning-process" title="Link to this heading">#</a></h3>
 <p>Auxiliary function that extracts the learning rate</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_lr</span><span class="p">(</span><span class="n">optimizer</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span> <span class="nf">get_lr</span><span class="p">(</span><span class="n">optimizer</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">param_group</span> <span class="ow">in</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">param_groups</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">param_group</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Data_label</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">Data_label</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">data</span>
@@ -678,8 +637,6 @@ document.write(`
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span>
 </pre></div>
-</div>
-</div>
 </div>
 <section id="initializing-the-neural-net-and-defining-the-optimizer">
 <h4>Initializing the neural net and defining the optimizer<a class="headerlink" href="#initializing-the-neural-net-and-defining-the-optimizer" title="Link to this heading">#</a></h4>
@@ -694,25 +651,24 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="n">q_hat</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><img alt="Untitled" src="_images/Network1.png" /></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># Torchsummary provides a more readable summary of the neural network</span>
 <span class="n">torchsummary</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">q_hat</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 </pre></div>
 </div>
+<p><img alt="Untitled" src="_images/Network2.png" /></p>
 </section>
 </section>
 <section id="optimization-of-the-network-s-weights">
 <h3>Optimization of the network’s weights<a class="headerlink" href="#optimization-of-the-network-s-weights" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="n">Params</span><span class="p">()</span><span class="o">.</span><span class="n">delta</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">Params</span><span class="p">()</span><span class="o">.</span><span class="n">delta</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="n">Params</span><span class="p">()</span><span class="o">.</span><span class="n">beta</span>
 <span class="n">k_0</span> <span class="o">=</span> <span class="n">Params</span><span class="p">()</span><span class="o">.</span><span class="n">k_0</span>
 
 <span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">1001</span>
 </pre></div>
-</div>
-</div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
@@ -779,6 +735,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+<p><img alt="Untitled" src="_images/Fit_DL.png" /></p>
 </section>
 </section>
 </section>
