@@ -15,34 +15,29 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-fontsize= 14
-ticksize = 14
-figsize = (12, 4.5)
-params = {'font.family':'serif',
-    "figure.figsize":figsize,
-    'figure.dpi': 80,
-    'figure.edgecolor': 'k',
-    'font.size': fontsize,
-    'axes.labelsize': fontsize,
-    'axes.titlesize': fontsize,
-    'xtick.labelsize': ticksize,
-    'ytick.labelsize': ticksize
-}
-plt.rcParams.update(params)
+class Params(d2l.HyperParameters):
+    def __init__(self,
+                 alpha = 1.0/3.0,
+                 beta = 0.9,
+                 delta = 0.1,
+                 k_0 = 1.0,
+                ):
+        self.save_hyperparameters()
+
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 14[0m
-[1;32m      3[0m figsize [38;5;241m=[39m ([38;5;241m12[39m, [38;5;241m4.5[39m)
-[1;32m      4[0m params [38;5;241m=[39m {[38;5;124m'[39m[38;5;124mfont.family[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mserif[39m[38;5;124m'[39m,
-[1;32m      5[0m     [38;5;124m"[39m[38;5;124mfigure.figsize[39m[38;5;124m"[39m:figsize,
-[1;32m      6[0m     [38;5;124m'[39m[38;5;124mfigure.dpi[39m[38;5;124m'[39m: [38;5;241m80[39m,
-[0;32m   (...)[0m
-[1;32m     12[0m     [38;5;124m'[39m[38;5;124mytick.labelsize[39m[38;5;124m'[39m: ticksize
-[1;32m     13[0m }
-[0;32m---> 14[0m [43mplt[49m[38;5;241m.[39mrcParams[38;5;241m.[39mupdate(params)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mclass[39;00m [38;5;21;01mParams[39;00m([43md2l[49m[38;5;241m.[39mHyperParameters):
+[1;32m      2[0m     [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m,
+[1;32m      3[0m                  alpha [38;5;241m=[39m [38;5;241m1.0[39m[38;5;241m/[39m[38;5;241m3.0[39m,
+[1;32m      4[0m                  beta [38;5;241m=[39m [38;5;241m0.9[39m,
+[1;32m      5[0m                  delta [38;5;241m=[39m [38;5;241m0.1[39m,
+[1;32m      6[0m                  k_0 [38;5;241m=[39m [38;5;241m1.0[39m,
+[1;32m      7[0m                 ):
+[1;32m      8[0m         [38;5;28mself[39m[38;5;241m.[39msave_hyperparameters()
 
-[0;31mNameError[0m: name 'plt' is not defined
+[0;31mNameError[0m: name 'd2l' is not defined
 
