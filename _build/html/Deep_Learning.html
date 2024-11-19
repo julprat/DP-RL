@@ -385,7 +385,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">PyTorch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-of-growth-model">Approximation of Growth Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-grid-and-data-loader">Preparing grid and data loader</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-structure-of-neural-network">Defining structure of neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-structure-of-the-neural-network">Defining the structure of the neural network</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-of-neural-network">Optimization of neural network</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-results">Plotting the results</a></li>
 </ul>
@@ -417,7 +417,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">nn.Parameter</span></code> contains the parameters of your neural network, like weights and biases.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">forward()</span></code> tells the larger blocks of your network how to make calculations on inputs.</p></li>
 </ul>
-<p>In order to train your model, you have to define the <strong>loss function</strong> that you wish to minmize. In practice, the loss will measure how far the predictions of your model are from the actual values stored in your testing set.</p>
+<p>In order to train your model, you have to define the <strong>loss function</strong> that you wish to minimize. In practice, the loss will measure how far the predictions of your model are from the actual values stored in your testing set.</p>
 <p>PyTorch training loop goes through the following 5 steps:</p>
 <p><img alt="Untitled" src="_images/Steps_PyTorch.png" /></p>
 <p>Finally, the testing loop where you evaluate your model, is typicially made of the following steps:</p>
@@ -557,8 +557,8 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="defining-structure-of-neural-network">
-<h3>Defining structure of neural network<a class="headerlink" href="#defining-structure-of-neural-network" title="Link to this heading">#</a></h3>
+<section id="defining-the-structure-of-the-neural-network">
+<h3>Defining the structure of the neural network<a class="headerlink" href="#defining-the-structure-of-the-neural-network" title="Link to this heading">#</a></h3>
 <p>Here the the approximation function (deep neural net) is <span class="math notranslate nohighlight">\(\hat{q}=[\hat{c},\hat{k}] : \mathbb{R} → \mathbb{R}^2\)</span>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">class</span> <span class="nc">NN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">d2l</span><span class="o">.</span><span class="n">HyperParameters</span><span class="p">):</span>
@@ -755,7 +755,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">PyTorch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-of-growth-model">Approximation of Growth Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-grid-and-data-loader">Preparing grid and data loader</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-structure-of-neural-network">Defining structure of neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-structure-of-the-neural-network">Defining the structure of the neural network</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-of-neural-network">Optimization of neural network</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-results">Plotting the results</a></li>
 </ul>
