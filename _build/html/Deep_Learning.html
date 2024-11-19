@@ -183,8 +183,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Recursive_Problem.html">Sequential &amp; Recursive Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bellman_Equation.html">Bellman Equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Growth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Application: Optimal Growth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Learning.html">Bayesian Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reinforcement_Learning.html">Reinforcement Learning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Deep Learning</a></li>
 </ul>
@@ -589,36 +589,6 @@ document.write(`
         <span class="k">return</span>  <span class="n">out</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="c1"># Alternative Neural Network with ReLU activation functions</span>
-<span class="sd">&quot;&quot;&quot; class NN(nn.Module, d2l.HyperParameters):</span>
-<span class="sd">    def __init__(self,</span>
-<span class="sd">                 dim_hidden = 128,</span>
-<span class="sd">                layers = 4,</span>
-<span class="sd">                hidden_bias = True):</span>
-<span class="sd">        super().__init__()</span>
-<span class="sd">        self.save_hyperparameters()</span>
-
-<span class="sd">        torch.manual_seed(123)</span>
-<span class="sd">        module = []</span>
-<span class="sd">        module.append(nn.Linear(1,self.dim_hidden, bias = self.hidden_bias))</span>
-<span class="sd">        module.append(nn.ReLU())</span>
-
-<span class="sd">        for i in range(self.layers-1):</span>
-<span class="sd">            module.append(nn.Linear(self.dim_hidden,self.dim_hidden, bias = self.hidden_bias))</span>
-<span class="sd">            module.append(nn.ReLU())</span>
-
-<span class="sd">        module.append(nn.Linear(self.dim_hidden,2))</span>
-<span class="sd">        module.append(nn.Softplus(beta = 1.0)) #The softplus layer ensures c&gt;0,k&gt;0</span>
-
-<span class="sd">        self.q = nn.Sequential(*module)</span>
-
-
-<span class="sd">    def forward(self, x):</span>
-<span class="sd">        out = self.q(x) # first element is consumption, the second element is capital</span>
-<span class="sd">        return  out &quot;&quot;&quot;</span>
-</pre></div>
-</div>
 </section>
 <section id="optimization-of-neural-network">
 <h3>Optimization of neural network<a class="headerlink" href="#optimization-of-neural-network" title="Link to this heading">#</a></h3>
@@ -627,20 +597,6 @@ document.write(`
 <span class="k">def</span> <span class="nf">get_lr</span><span class="p">(</span><span class="n">optimizer</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">param_group</span> <span class="ow">in</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">param_groups</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">param_group</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="k">class</span> <span class="nc">Data_label</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span>
 </pre></div>
 </div>
 <p>Initializing the neural net and defining the optimizer.</p>
