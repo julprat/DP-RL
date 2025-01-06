@@ -665,18 +665,18 @@ document.write(`
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     D &amp;= \lim_{T\rightarrow \infty}\sum_{t = 0}^{T} \beta^{t}[F\left(x^{*}_{t}, x_{t+1}^{*}\right) - F\left(x_{t}, x_{t+1}\right)]\\
-      &amp;\geq \lim_{T\rightarrow \infty}\sum_{t = 0}^{T} \beta^{t}[F_{x}\left(x^{*}_{t}, x_{t+1}^{*}\right)\left(x^{*}_{t}-x_{t}\right) + F_{y}\left(x^{*}_{t}, x_{t+1}^{*}\right)\left(x^{*}_{t+1}-x_{t+1}\right)].
+      &amp;\geq \lim_{T\rightarrow \infty}\sum_{t = 0}^{T} \beta^{t}[F_{1}\left(x^{*}_{t}, x_{t+1}^{*}\right)\left(x^{*}_{t}-x_{t}\right) + F_{2}\left(x^{*}_{t}, x_{t+1}^{*}\right)\left(x^{*}_{t+1}-x_{t+1}\right)].
 \end{align*}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(x_{0}^{*} - x_{0} = 0\)</span>, rearranging terms givees</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
-    D \geq \lim_{T\rightarrow \infty}\{\sum_{t = 0}^{T-1} \beta^{t}[F_{y}\left(x^{*}_{t}, x_{t+1}^{*}\right) + \beta F_{x}\left(x^{*}_{t+1}, x_{t+2}^{*}\right)]\left(x^{*}_{t+1}-x_{t+1}\right) + \beta^{T} F_{y}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T+1}-x_{T+1}\right)\}.
+    D \geq \lim_{T\rightarrow \infty}\{\sum_{t = 0}^{T-1} \beta^{t}[F_{2}\left(x^{*}_{t}, x_{t+1}^{*}\right) + \beta F_{1}\left(x^{*}_{t+1}, x_{t+2}^{*}\right)]\left(x^{*}_{t+1}-x_{t+1}\right) + \beta^{T} F_{2}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T+1}-x_{T+1}\right)\}.
 \end{equation*}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\{x^{*}\}\)</span> satisfies the FOC, the terms in the summation are all zero. Therefore, by the FOC and EC,</p>
+<p>Since <span class="math notranslate nohighlight">\(\{x^{*}\}\)</span> satisfies the FOC, the terms in the summation are all zero. Therefore, by the FOC and using the Euler Equation to substitute the last remaining term, we obtain</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    D &amp;\geq -\lim_{T\rightarrow \infty}\beta^{T} F_{x}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T}-x_{T}\right)\\
-      &amp;\geq -\lim_{T\rightarrow \infty}\beta^{T} F_{x}\left(x^{*}_{T}, x_{T+1}^{*}\right)x^{*}_{T}.
+    D &amp;\geq \lim_{T\rightarrow \infty} \beta^{T} F_{2}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T+1}-x_{T+1}\right) =-\lim_{T\rightarrow \infty}\beta^{T} F_{1}\left(x^{*}_{T}, x_{T+1}^{*}\right)\left(x^{*}_{T}-x_{T}\right)\\
+      &amp;\geq -\lim_{T\rightarrow \infty}\beta^{T} F_{1}\left(x^{*}_{T}, x_{T+1}^{*}\right)x^{*}_{T}.
 \end{align*}\]</div>
 <p>It then follows that <span class="math notranslate nohighlight">\(D\geq 0\)</span>, establishing the desired result.</p>
 <ol class="arabic simple" start="2">
