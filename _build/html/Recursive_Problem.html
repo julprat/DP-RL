@@ -184,9 +184,10 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Sequential &amp; Recursive Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bellman_Equation.html">Bellman Equation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Growth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Optimal_Growth.html">Application: Optimal Growth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Learning.html">Bayesian Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reinforcement_Learning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Deep_Learning.html">Deep Learning</a></li>
 </ul>
 
     </div>
@@ -462,7 +463,7 @@ and modify the savings technology so that</p>
             &amp; = 2(1+r)x_0.
       \end{align*}\]</div>
 <p>The last equality follows from the fact that <span class="math notranslate nohighlight">\(V^*\left(-\frac{x_0}{\beta}\right)=0\)</span> because <span class="math notranslate nohighlight">\(-x_0/\beta\)</span> is negative.</p>
-<p>Putting together the two solutions, we find that <span class="math notranslate nohighlight">\(V^*(x)=\min\{2(1+r)x,0\}\)</span>. The optimal solution to the sequential problem satisfies the trensversality condition since <span class="math notranslate nohighlight">\(\lim_{t\rightarrow \infty}\beta^tV^*(x^*_t)=0\)</span>.</p>
+<p>Putting together the two solutions, we find that <span class="math notranslate nohighlight">\(V^*(x)=\max\{2(1+r)x,0\}\)</span>. The optimal solution to the sequential problem satisfies the trensversality condition since <span class="math notranslate nohighlight">\(\lim_{t\rightarrow \infty}\beta^tV^*(x^*_t)=0\)</span>.</p>
 <p>We now compute the solution of the Functional Equation <span class="math notranslate nohighlight">\(V(x)=\max_{x' \in \Gamma(x)}\left\{(1+r)x-x'+\beta V(x')\right\}.\)</span></p>
 <p>We try the following guess <span class="math notranslate nohighlight">\(V(x)=(1+r)x\)</span>. Reinserting it into the Functional Equation, we get</p>
 <div class="amsmath math notranslate nohighlight">
